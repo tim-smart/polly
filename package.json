@@ -1,0 +1,27 @@
+{
+  "name": "polly",
+  "version": "0.1.0",
+  "author": "Tim Smart <hello@timsmart.co>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mongodb": "^3.6.17",
+    "@types/node": "^15.6.1",
+    "@types/number-to-words": "^1.2.1",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.3.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "bufferutil": "^4.0.3",
+    "dotenv": "^10.0.0",
+    "droff": "^0.12.5",
+    "fp-ts": "^2.10.5",
+    "immutable": "^4.0.0-rc.12",
+    "mongodb": "^3.6.9",
+    "number-to-words": "^1.2.4",
+    "remeda": "^0.0.27"
+  }
+}
