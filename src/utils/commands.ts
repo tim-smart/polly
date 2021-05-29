@@ -28,9 +28,7 @@ export const isSubCommand = (name: string) =>
 export const subCommandOptions = (name: string) =>
   F.flow(
     findSubCommand(name),
-    O.chainNullableK(
-      (o) => o.options as ApplicationCommandInteractionDataOption[],
-    ),
+    O.chainNullableK((o) => o.options),
   );
 
 export const optionsMap = (

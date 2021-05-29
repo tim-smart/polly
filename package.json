@@ -20,7 +20,7 @@
   "dependencies": {
     "bufferutil": "^4.0.3",
     "dotenv": "^10.0.0",
-    "droff": "^0.12.5",
+    "droff": "^0.12.6",
     "fp-ts": "^2.10.5",
     "immutable": "^4.0.0-rc.12",
     "mongodb": "^3.6.9",
