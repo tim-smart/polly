@@ -17,9 +17,9 @@ export const findSubCommand =
         Arr.findFirst(
           (o: ApplicationCommandInteractionDataOption) =>
             o.type === ApplicationCommandOptionType.SUB_COMMAND &&
-            o.name === name
-        )
-      )
+            o.name === name,
+        ),
+      ),
     );
 
 export const isSubCommand = (name: string) =>
@@ -29,14 +29,14 @@ export const subCommandOptions = (name: string) =>
   F.flow(
     findSubCommand(name),
     O.chainNullableK(
-      (o) => o.options as ApplicationCommandInteractionDataOption[]
-    )
+      (o) => o.options as ApplicationCommandInteractionDataOption[],
+    ),
   );
 
 export const optionsMap = (
-  options: ApplicationCommandInteractionDataOption[]
+  options: ApplicationCommandInteractionDataOption[],
 ) =>
   options.reduce(
     (map, option) => map.set(option.name, option.value),
-    Im.Map<string, any>()
+    Im.Map<string, any>(),
   );

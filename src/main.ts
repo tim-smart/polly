@@ -15,7 +15,7 @@ async function main() {
   const commands = client.useSlashCommands();
 
   // Register commands
-  require("./commands/poll").register(commands, db);
+  require("./polls/command").register(commands, client, db);
 
   commands.start();
 }

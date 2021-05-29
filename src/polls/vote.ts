@@ -6,6 +6,7 @@ import * as Rx from "rxjs";
 import * as RxO from "rxjs/operators";
 import * as Helpers from "./helpers";
 import * as Repo from "./repo";
+import * as ToggleVote from "./ops/toggle-vote";
 
 export const handle =
   (db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>
@@ -18,21 +19,21 @@ export const handle =
           Helpers.buttonIdDetails(ctx.interaction.data!.custom_id),
           O.fold(
             () => Rx.EMPTY,
-            (details) => Rx.of([ctx, details] as const)
-          )
-        )
+            (details) => Rx.of([ctx, details] as const),
+          ),
+        ),
       ),
 
       // Get the poll from the repo
       RxO.flatMap(([ctx, { pollID, choice }]) =>
-        Rx.zip(Rx.of(ctx), Repo.get(db)(pollID), Rx.of(choice))
+        Rx.zip(Rx.of(ctx), Repo.get(db)(pollID), Rx.of(choice)),
       ),
 
       // Toggle the vote
       RxO.flatMap(([ctx, poll, choiceIndex]) =>
-        Repo.toggleVote(db)(poll)(poll.choices[choiceIndex].name)(
-          (ctx.member?.user || ctx.user!).id
-        ).then((op) => [ctx, poll, op] as const)
+        ToggleVote.run(db)(poll)(poll.choices[choiceIndex].name)(
+          (ctx.member?.user || ctx.user!).id,
+        ).then((op) => [ctx, poll, op] as const),
       ),
 
       // Update poll if it wasn't a fail
@@ -42,6 +43,6 @@ export const handle =
               content: "You can only vote on this poll once.",
               flags: 64,
             })
-          : Helpers.toResponse(db)(poll).then(ctx.update)
-      )
+          : Helpers.toResponse(db)(poll).then(ctx.update),
+      ),
     );
