@@ -1,6 +1,10 @@
 import {
   Component,
+  Embed,
+  EmbedField,
+  EmbedType,
   InteractionApplicationCommandCallbackDatum,
+  Snowflake,
 } from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
@@ -39,12 +43,45 @@ export const toResponse =
   async (poll: Poll): Promise<InteractionApplicationCommandCallbackDatum> => {
     const counts = await Repo.votesMap(db)(poll._id!);
     const votes = poll.choices.reduce(
-      (map, choice) => map.set(choice.name, counts.get(choice.name, 0)),
-      Im.OrderedMap<string, number>()
+      (map, choice) => map.set(choice.name, counts.get(choice.name, Im.Set())),
+      Im.OrderedMap<string, Im.Set<Snowflake>>()
     );
 
     return {
-      content: JSON.stringify(votes.toJSON()),
+      embeds: [embed(poll, votes)],
       components: Components.grid(buttons(poll)),
     };
   };
+
+export const embed = (
+  poll: Poll,
+  votes: Im.OrderedMap<string, Im.Set<Snowflake>>
+): Embed => {
+  return {
+    author: { name: "Polly" },
+    title: poll.question,
+    color: 0x99aab5,
+    fields: votes
+      .entrySeq()
+      .map(
+        ([choice, votes]): EmbedField => ({
+          name: `${choice} (${votes.count()})`,
+          value: F.pipe(
+            votes,
+            O.fromPredicate(() => poll.anonymous),
+            O.map(() => "Votes are anonymous"),
+            O.alt(() => voteSummary(votes)),
+            O.getOrElse(() => "No votes")
+          ),
+        })
+      )
+      .toArray(),
+  };
+};
+
+export const voteSummary = (votes: Im.Set<Snowflake>) =>
+  F.pipe(
+    votes,
+    O.fromPredicate((v) => !v.isEmpty()),
+    O.map((votes) => votes.map((id) => `<@${id}>`).join(", "))
+  );

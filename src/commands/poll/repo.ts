@@ -27,19 +27,18 @@ export const get = (db: Db) => (pollId: ObjectId) => {
   );
 };
 
-export const votesMap =
-  (db: Db) =>
-  (pollID: ObjectId): Promise<Im.Map<string, number>> =>
-    F.pipe(
-      votesCollection(db),
-      (c) => Rx.from(c.find({ pollID }).toArray()),
-      RxO.flatMap(F.identity),
-      RxO.reduce(
-        (counts, vote) => counts.update(vote.option, 0, (count) => count + 1),
-        Im.Map<string, number>()
-      ),
-      (o) => Rx.lastValueFrom(o)
-    );
+export const votesMap = (db: Db) => (pollID: ObjectId) =>
+  F.pipe(
+    votesCollection(db),
+    (c) => Rx.from(c.find({ pollID }).toArray()),
+    RxO.flatMap(F.identity),
+    RxO.reduce(
+      (counts, vote) =>
+        counts.update(vote.option, Im.Set(), (ids) => ids.add(vote.userID)),
+      Im.Map<string, Im.Set<Snowflake>>()
+    ),
+    (o) => Rx.lastValueFrom(o)
+  );
 
 export type ToggleResult = "add" | "remove" | "fail";
 
