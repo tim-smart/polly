@@ -9,7 +9,9 @@ async function main() {
     intents: Intents.GUILDS,
   });
 
-  const mongo = await MongoClient.connect(process.env.MONGODB_URI!);
+  const mongo = await MongoClient.connect(process.env.MONGODB_URI!, {
+    useUnifiedTopology: true,
+  });
   const db = mongo.db(process.env.MONGODB_DB!);
 
   const commands = client.useSlashCommands();
