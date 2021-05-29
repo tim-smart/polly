@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "author": "Tim Smart <hello@timsmart.co>",
   "license": "MIT",
+  "scripts": {
+    "build": "rm -rf dist/ && tsc"
+  },
   "devDependencies": {
     "@types/mongodb": "^3.6.17",
     "@types/node": "^15.6.1",
