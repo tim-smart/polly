@@ -41,12 +41,14 @@ const pollFromOptions = (
       .filter(({ name }) => name.startsWith("choice-"))
       .map(({ value }): Choice => ({ name: value! }));
 
-    const poll = map.filter((_, key) => !key.startsWith("choice-")).toJS();
+    const poll = map.filter((_, key) => !key.startsWith("choice-")).toJSON();
 
     return {
       ...poll,
       interactionID,
       ownerID,
+      multiple: poll.multiple === "true",
+      anonymous: poll.anonymous === "true",
       choices,
     } as Poll;
   });

@@ -25,16 +25,36 @@ const command: GuildCommandCreate = {
       required: true,
     },
     {
-      type: ApplicationCommandOptionType.BOOLEAN,
+      type: ApplicationCommandOptionType.STRING,
       name: "multiple",
       description: "Allow people to vote for more than one option",
       required: true,
+      choices: [
+        {
+          name: "no",
+          value: "false",
+        },
+        {
+          name: "yes",
+          value: "true",
+        },
+      ],
     },
     {
-      type: ApplicationCommandOptionType.BOOLEAN,
+      type: ApplicationCommandOptionType.STRING,
       name: "anonymous",
       description: "Allow people to vote for more than one option",
       required: true,
+      choices: [
+        {
+          name: "no",
+          value: "false",
+        },
+        {
+          name: "yes",
+          value: "true",
+        },
+      ],
     },
     ...[...Array(25 - 3).keys()].map((index) => ({
       type: ApplicationCommandOptionType.STRING,
