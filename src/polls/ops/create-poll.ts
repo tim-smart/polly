@@ -37,11 +37,9 @@ const pollFromOptions = (
   options: ApplicationCommandInteractionDataOption[],
 ): Poll =>
   F.pipe(Commands.optionsMap(options), (map) => {
-    const choices = map
-      .filter((_, key) => key.startsWith("choice-"))
-      .valueSeq()
-      .map((name): Choice => ({ name }))
-      .toArray();
+    const choices = options
+      .filter(({ name }) => name.startsWith("choice-"))
+      .map(({ value }): Choice => ({ name: value! }));
 
     const poll = map.filter((_, key) => !key.startsWith("choice-")).toJS();
 
