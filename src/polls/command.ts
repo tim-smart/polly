@@ -43,7 +43,7 @@ const command: GuildCommandCreate = {
     {
       type: ApplicationCommandOptionType.STRING,
       name: "anonymous",
-      description: "Allow people to vote for more than one option",
+      description: "Only show results to the poll creator and admins",
       required: true,
       choices: [
         {
