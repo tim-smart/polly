@@ -6,6 +6,7 @@ import { Db, ObjectId } from "mongodb";
 import { Poll } from "../../models/Poll";
 import { Vote } from "../../models/Vote";
 import * as Repo from "../repo";
+import * as R from "remeda";
 
 export type ToggleResult = "add" | "remove" | "fail";
 
@@ -18,6 +19,7 @@ export const run =
 
     return F.pipe(
       votes,
+      R.filter((v) => v.userID === userID),
       O.fromPredicate(canToggleVote(poll, option)),
       O.map(actuallyToggle(db)(poll._id!, userID, option)),
       O.getOrElse(() => Promise.resolve<ToggleResult>("fail")),
