@@ -5,6 +5,7 @@ import {
 } from "droff/dist/slash-commands/factory";
 import { ApplicationCommandOptionType } from "droff/dist/types";
 import * as F from "fp-ts/function";
+import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";
 import { toOrdinal, toWords } from "number-to-words";
 import * as Rx from "rxjs";
@@ -90,14 +91,13 @@ const handle = (db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>
   F.pipe(
     source$,
     RxO.flatMap((ctx) =>
-      CreatePoll.fromContext(db)(ctx)
-        .then(Helpers.toResponse(db))
-        .then((msg) => ctx.respond(msg))
-        .catch((err) =>
-          ctx.respond({
-            content: err.message,
-            flags: 64,
-          }),
+      F.pipe(
+        CreatePoll.fromContext(db)(ctx),
+        TE.chain(Helpers.toResponse(db)),
+        TE.foldW(
+          (content) => () => ctx.respond({ content, flags: 64 }),
+          (msg) => () => ctx.respond(msg),
         ),
+      )(),
     ),
   );

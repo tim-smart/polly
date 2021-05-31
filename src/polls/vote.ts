@@ -1,12 +1,14 @@
 import { SlashCommandContext } from "droff/dist/slash-commands/factory";
+import * as E from "fp-ts/Either";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";
 import * as Rx from "rxjs";
 import * as RxO from "rxjs/operators";
 import * as Helpers from "./helpers";
-import * as Repo from "./repo";
 import * as ToggleVote from "./ops/toggle-vote";
+import * as Repo from "./repo";
 
 export const handle =
   (db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>
@@ -31,18 +33,25 @@ export const handle =
 
       // Toggle the vote
       RxO.flatMap(([ctx, poll, choiceIndex]) =>
-        ToggleVote.run(db)(poll)(poll.choices[choiceIndex].name)(
-          (ctx.member?.user || ctx.user!).id,
-        ).then((op) => [ctx, poll, op] as const),
+        F.pipe(
+          ToggleVote.run(db)(poll)(poll.choices[choiceIndex].name)(
+            (ctx.member?.user || ctx.user!).id,
+          ),
+          TE.chain(() => Helpers.toResponse(db)(poll)),
+          TE.chain(TE.tryCatchK(ctx.update, () => "Could not update poll")),
+          TE.orElse(
+            TE.tryCatchK(
+              (content) =>
+                ctx.respond({
+                  content,
+                  flags: 64,
+                }),
+              (err) => `Could not repond: ${err}`,
+            ),
+          ),
+        )(),
       ),
 
-      // Update poll if it wasn't a fail
-      RxO.flatMap(([ctx, poll, op]) =>
-        op === "fail"
-          ? ctx.respond({
-              content: "You can only vote on this poll once.",
-              flags: 64,
-            })
-          : Helpers.toResponse(db)(poll).then(ctx.update),
-      ),
+      // Maybe log errors
+      RxO.tap(E.foldW(console.error, () => {})),
     );

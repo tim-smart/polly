@@ -5,6 +5,7 @@ import {
 } from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";
 import { Choice, Poll } from "../../models/Poll";
 import * as Commands from "../../utils/commands";
@@ -13,9 +14,12 @@ import * as Repo from "../repo";
 export const fromContext = (db: Db) => (ctx: SlashCommandContext) =>
   F.pipe(
     pollFromData(ctx),
-    O.fold(
-      () => Promise.reject("Oops! Could not create the poll."),
-      (poll) => Repo.insert(db)(poll),
+    TE.fromPredicate(O.isSome, () => "Oops! Could not create the poll."),
+    TE.chain(
+      TE.tryCatchK(
+        (poll) => Repo.insert(db)(poll.value),
+        () => "Could not insert poll.",
+      ),
     ),
   );
 

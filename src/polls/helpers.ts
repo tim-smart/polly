@@ -3,6 +3,7 @@ import {
   Snowflake,
 } from "droff/dist/types";
 import * as F from "fp-ts/function";
+import * as TE from "fp-ts/lib/TaskEither";
 import * as O from "fp-ts/Option";
 import * as Im from "immutable";
 import { Db, ObjectId } from "mongodb";
@@ -48,14 +49,17 @@ export const votesMap = (poll: Poll, votes: Vote[]) => {
   );
 };
 
-export const toResponse =
-  (db: Db) =>
-  async (poll: Poll): Promise<InteractionApplicationCommandCallbackDatum> => {
-    const votes = await Repo.votes(db)(poll._id!);
-    const voteUserIds = votesMap(poll, votes);
-
-    return {
-      embeds: [UI.embed(poll, votes, voteUserIds)],
-      components: Components.grid(UI.buttons(poll)),
-    };
-  };
+export const toResponse = (db: Db) => (poll: Poll) =>
+  F.pipe(
+    TE.tryCatch(
+      () => Repo.votes(db)(poll._id!),
+      () => "Could not fetch votes",
+    ),
+    TE.map((votes) => [votes, votesMap(poll, votes)] as const),
+    TE.map(
+      ([votes, votesMap]): InteractionApplicationCommandCallbackDatum => ({
+        embeds: [UI.embed(poll, votes, votesMap)],
+        components: Components.grid(UI.buttons(poll)),
+      }),
+    ),
+  );

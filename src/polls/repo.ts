@@ -1,3 +1,4 @@
+import { Snowflake } from "droff/dist/types";
 import * as F from "fp-ts/function";
 import { Db, ObjectId } from "mongodb";
 import * as Rx from "rxjs";
@@ -23,11 +24,17 @@ export const get = (db: Db) => (pollId: ObjectId) => {
   );
 };
 
-export const insertVote = (db: Db) => async (vote: Vote) => {
-  const coll = votesCollection(db);
-  const result = await coll.insertOne(vote);
-  return result.ops[0];
-};
+export const insertVote =
+  (db: Db) => (multiple: boolean) => async (vote: Vote) => {
+    const coll = votesCollection(db);
+
+    if (!multiple) {
+      await coll.deleteMany({ pollID: vote.pollID, userID: vote.userID });
+    }
+
+    const result = await coll.insertOne(vote);
+    return result.ops[0];
+  };
 
 export const deleteVote = (db: Db) => async (voteId: ObjectId) => {
   const coll = votesCollection(db);
@@ -37,4 +44,9 @@ export const deleteVote = (db: Db) => async (voteId: ObjectId) => {
 export const votes = (db: Db) => (pollID: ObjectId) => {
   const coll = votesCollection(db);
   return coll.find({ pollID }).toArray();
+};
+
+export const userVote = (db: Db) => (pollID: ObjectId, userID: Snowflake) => {
+  const coll = votesCollection(db);
+  return coll.find({ pollID, userID }).toArray();
 };
