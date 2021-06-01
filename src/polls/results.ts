@@ -3,6 +3,7 @@ import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { Db } from "mongodb";
 import * as Rx from "rxjs";
+import * as TE from "fp-ts/TaskEither";
 import * as RxO from "rxjs/operators";
 import * as Helpers from "./helpers";
 import * as Repo from "./repo";
@@ -38,28 +39,12 @@ export const handle =
 
       // Try to generate the embed
       RxO.flatMap(([[ctx, poll], { guild, roles }]) =>
-        Rx.zip(
-          Rx.of(ctx),
-          ViewResults.run(db)(poll)(ctx.interaction, guild, roles),
-        ),
-      ),
-
-      RxO.flatMap(([ctx, embed]) =>
         F.pipe(
-          embed,
-          O.fold(
-            () =>
-              ctx.respond({
-                content:
-                  "You need to be the poll owner or an admin to view the results.",
-                flags: 64,
-              }),
-            (embed) =>
-              ctx.respond({
-                embeds: [embed],
-                flags: 64,
-              }),
+          ViewResults.run(db)(poll)(ctx.interaction, guild, roles),
+          TE.foldW(
+            (content) => () => ctx.respond({ content, flags: 64 }),
+            (embed) => () => ctx.respond({ embeds: [embed], flags: 64 }),
           ),
-        ),
+        )(),
       ),
     );

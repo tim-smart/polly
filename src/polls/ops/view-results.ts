@@ -1,13 +1,13 @@
 import { SnowflakeMap } from "droff/dist/gateway-utils/resources";
 import {
-  Embed,
   Guild,
   GuildMember,
   Interaction,
   PermissionFlag,
   Role,
 } from "droff/dist/types";
-import * as O from "fp-ts/Option";
+import * as F from "fp-ts/function";
+import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";
 import { Poll } from "../../models/Poll";
 import * as Helpers from "../helpers";
@@ -17,19 +17,22 @@ import * as Ui from "../ui";
 export const run =
   (db: Db) =>
   (poll: Poll) =>
-  async (
-    { member }: Interaction,
-    guild: Guild,
-    roles: SnowflakeMap<Role>,
-  ): Promise<O.Option<Embed>> => {
-    const canView = hasPermission(poll, guild, roles)(member!);
-    if (!canView) return O.none;
-
-    const votes = await Repo.votes(db)(poll._id!);
-    const votesMap = Helpers.votesMap(poll, votes);
-
-    return O.some(Ui.embed(poll, votes, votesMap, true));
-  };
+  ({ member }: Interaction, guild: Guild, roles: SnowflakeMap<Role>) =>
+    F.pipe(
+      member!,
+      TE.fromPredicate(
+        hasPermission(poll, guild, roles),
+        () => "You need to be the poll owner or an admin to view the results.",
+      ),
+      TE.chain(() =>
+        TE.tryCatch(
+          () => Repo.votes(db)(poll._id!),
+          () => "Could not fetch votes",
+        ),
+      ),
+      TE.map((votes) => [votes, Helpers.votesMap(poll, votes)] as const),
+      TE.map(([votes, votesMap]) => Ui.embed(poll, votes, votesMap, true)),
+    );
 
 const hasPermission =
   (poll: Poll, guild: Guild, roles: SnowflakeMap<Role>) =>
