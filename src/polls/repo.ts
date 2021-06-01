@@ -1,8 +1,7 @@
 import { Snowflake } from "droff/dist/types";
 import * as F from "fp-ts/function";
+import * as O from "fp-ts/Option";
 import { Db, ObjectId } from "mongodb";
-import * as Rx from "rxjs";
-import * as RxO from "rxjs/operators";
 import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
 
@@ -18,10 +17,7 @@ export const insert =
 
 export const get = (db: Db) => (pollId: ObjectId) => {
   const coll = collection(db);
-  return F.pipe(
-    Rx.from(coll.findOne({ _id: pollId })),
-    RxO.flatMap((poll) => (poll ? Rx.of(poll) : Rx.EMPTY)),
-  );
+  return coll.findOne({ _id: pollId }).then(O.fromNullable);
 };
 
 export const insertVote =

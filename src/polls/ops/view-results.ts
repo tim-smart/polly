@@ -24,8 +24,8 @@ export const run =
         hasPermission(poll, guild, roles),
         () => "You need to be the poll owner or an admin to view the results.",
       ),
-      TE.chain(() =>
-        TE.tryCatch(
+      TE.chain(
+        TE.tryCatchK(
           () => Repo.votes(db)(poll._id!),
           () => "Could not fetch votes",
         ),

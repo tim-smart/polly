@@ -1,19 +1,11 @@
 import { Client, SlashCommandsHelper } from "droff";
-import {
-  GuildCommandCreate,
-  SlashCommandContext,
-} from "droff/dist/slash-commands/factory";
+import { GuildCommandCreate } from "droff/dist/slash-commands/factory";
 import { ApplicationCommandOptionType } from "droff/dist/types";
-import * as F from "fp-ts/function";
-import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";
 import { toOrdinal, toWords } from "number-to-words";
-import * as Rx from "rxjs";
-import * as RxO from "rxjs/operators";
-import * as Helpers from "./helpers";
-import * as CreatePoll from "./ops/create-poll";
-import * as Results from "./results";
-import * as Vote from "./vote";
+import * as Create from "./interactions/create";
+import * as Results from "./interactions/results";
+import * as Vote from "./interactions/vote";
 
 const command: GuildCommandCreate = {
   name: "poll",
@@ -72,7 +64,7 @@ export const register = (
   db: Db,
 ) => {
   // Poll creation command
-  commands.guild(command).pipe(handle(db)).subscribe();
+  commands.guild(command).pipe(Create.handle(db)).subscribe();
 
   // Handle votes
   commands
@@ -86,18 +78,3 @@ export const register = (
     .pipe(Results.handle(client, db))
     .subscribe();
 };
-
-const handle = (db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>
-  F.pipe(
-    source$,
-    RxO.flatMap((ctx) =>
-      F.pipe(
-        CreatePoll.fromContext(db)(ctx),
-        TE.chain(Helpers.toResponse(db)),
-        TE.foldW(
-          (content) => () => ctx.respond({ content, flags: 64 }),
-          (msg) => () => ctx.respond(msg),
-        ),
-      )(),
-    ),
-  );
