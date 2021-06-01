@@ -3,7 +3,7 @@ require("dotenv").config();
 import { createClient, Intents } from "droff";
 import { MongoClient } from "mongodb";
 import * as RxO from "rxjs/operators";
-import Topgg from "@top-gg/sdk";
+import * as Topgg from "@top-gg/sdk";
 
 async function main() {
   const client = createClient({
