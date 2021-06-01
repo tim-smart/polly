@@ -2,6 +2,7 @@ require("dotenv").config();
 
 import { createClient, Intents } from "droff";
 import { MongoClient } from "mongodb";
+import * as Rx from "rxjs";
 import * as RxO from "rxjs/operators";
 import * as Topgg from "@top-gg/sdk";
 
@@ -27,6 +28,7 @@ async function main() {
           serverCount,
         });
       }),
+      RxO.catchError(() => Rx.EMPTY),
     )
     .subscribe();
 
