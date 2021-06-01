@@ -17,16 +17,18 @@ async function main() {
   const topgg = new Topgg.Api(process.env.TOPGG_TOKEN!);
 
   // Send stats to top.gg
-  client.guilds$.pipe(
-    RxO.auditTime(60000),
-    RxO.flatMap((guilds) => {
-      const serverCount = guilds.count();
-      console.log("[main.ts]", "Updating top.gg serverCount", serverCount);
-      return topgg.postStats({
-        serverCount,
-      });
-    }),
-  );
+  client.guilds$
+    .pipe(
+      RxO.auditTime(60000),
+      RxO.flatMap((guilds) => {
+        const serverCount = guilds.count();
+        console.log("[main.ts]", "Updating top.gg serverCount", serverCount);
+        return topgg.postStats({
+          serverCount,
+        });
+      }),
+    )
+    .subscribe();
 
   // Register commands
   const commands = client.useSlashCommands();
