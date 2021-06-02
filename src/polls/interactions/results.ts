@@ -34,7 +34,7 @@ export const handle =
           // Create the poll embed
           TE.chain((poll) => createResponse(db)(context, poll, guild, roles)),
           // Try to send it (or display error)
-          Responses.empherial(context),
+          TE.chain(Responses.ephemeral(context)),
         )(),
       ),
 

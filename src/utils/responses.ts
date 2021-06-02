@@ -11,14 +11,11 @@ export const respond =
     ) => Promise<void>,
   ) =>
   (ctx: SlashCommandContext) =>
-  (input: TE.TaskEither<string, InteractionApplicationCommandCallbackDatum>) =>
+  (msg: InteractionApplicationCommandCallbackDatum) =>
     F.pipe(
-      input,
-      TE.chain(
-        TE.tryCatchK(
-          (msg) => fn(ctx, msg),
-          () => "Could not respond",
-        ),
+      TE.tryCatch(
+        () => fn(ctx, msg),
+        () => "Could not respond",
       ),
       TE.orElse(
         TE.tryCatchK(
@@ -29,7 +26,7 @@ export const respond =
     );
 
 export const update = respond(({ update }, msg) => update(msg));
-export const message = respond(({ respond }, msg) => respond({ ...msg }));
-export const empherial = respond(({ respond }, msg) =>
+export const message = respond(({ respond }, msg) => respond(msg));
+export const ephemeral = respond(({ respond }, msg) =>
   respond({ ...msg, flags: 64 }),
 );

@@ -29,7 +29,7 @@ const run = (db: Db) => (ctx: SlashCommandContext) =>
     TE.chain(({ poll }) => Helpers.toResponse(db)(poll)),
 
     // Send the update
-    Responses.update(ctx),
+    TE.chain(Responses.update(ctx)),
 
     // Maybe log errors
     TE.mapLeft(console.error),
