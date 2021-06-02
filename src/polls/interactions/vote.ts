@@ -11,10 +11,7 @@ import * as Repo from "../repo";
 
 export const handle =
   (db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>
-    F.pipe(
-      source$,
-      RxO.flatMap((ctx) => run(db)(ctx)()),
-    );
+    F.pipe(source$, RxO.flatMap(run(db)));
 
 const run = (db: Db) => (ctx: SlashCommandContext) =>
   F.pipe(
@@ -36,7 +33,7 @@ const run = (db: Db) => (ctx: SlashCommandContext) =>
 
     // Maybe log errors
     TE.mapLeft(console.error),
-  );
+  )();
 
 const fetchPoll = (db: Db) => (customID: string) =>
   F.pipe(

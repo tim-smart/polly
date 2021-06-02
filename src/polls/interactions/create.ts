@@ -10,16 +10,14 @@ import * as Responses from "../../utils/responses";
 
 export const handle =
   (db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>
-    F.pipe(
-      source$,
-      RxO.flatMap((ctx) =>
-        F.pipe(
-          CreatePoll.fromContext(db)(ctx),
-          TE.chain(Helpers.toResponse(db)),
-          Responses.message(ctx),
-          TE.mapLeft((err) =>
-            console.log("[polls/interactions/create.ts]", "ERROR", err),
-          ),
-        )(),
-      ),
-    );
+    F.pipe(source$, RxO.flatMap(run(db)));
+
+const run = (db: Db) => (ctx: SlashCommandContext) =>
+  F.pipe(
+    CreatePoll.fromContext(db)(ctx),
+    TE.chain(Helpers.toResponse(db)),
+    Responses.message(ctx),
+    TE.mapLeft((err) =>
+      console.log("[polls/interactions/create.ts]", "ERROR", err),
+    ),
+  )();

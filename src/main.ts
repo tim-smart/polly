@@ -1,10 +1,9 @@
 require("dotenv").config();
 
+import { Api } from "@top-gg/sdk";
 import { createClient, Intents } from "droff";
 import { MongoClient } from "mongodb";
-import * as Rx from "rxjs";
-import * as RxO from "rxjs/operators";
-import * as Topgg from "@top-gg/sdk";
+import * as Topgg from "./topgg";
 
 async function main() {
   const client = createClient({
@@ -15,22 +14,10 @@ async function main() {
     useUnifiedTopology: true,
   });
   const db = mongo.db(process.env.MONGODB_DB!);
-  const topgg = new Topgg.Api(process.env.TOPGG_TOKEN!);
+  const topgg = new Api(process.env.TOPGG_TOKEN!);
 
   // Send stats to top.gg
-  client.guilds$
-    .pipe(
-      RxO.auditTime(60000),
-      RxO.flatMap((guilds) => {
-        const serverCount = guilds.count();
-        console.log("[main.ts]", "Updating top.gg serverCount", serverCount);
-        return topgg.postStats({
-          serverCount,
-        });
-      }),
-      RxO.catchError(() => Rx.EMPTY),
-    )
-    .subscribe();
+  Topgg.postStats$(client, topgg).subscribe();
 
   // Register commands
   const commands = client.useSlashCommands();
