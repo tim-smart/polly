@@ -1,5 +1,4 @@
 import { SlashCommandContext } from "droff";
-import * as E from "fp-ts/Either";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";
@@ -14,34 +13,34 @@ export const handle =
   (db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>
     F.pipe(
       source$,
-
-      RxO.flatMap((ctx) =>
-        F.pipe(
-          // Fetch poll from interaction details
-          fetchPoll(db)(ctx),
-
-          // Toggle the vote and generate updated poll
-          TE.chain(({ poll, choice }) =>
-            F.pipe(
-              ToggleVote.run(db)(poll)(poll.choices[choice].name)(
-                (ctx.member?.user || ctx.user!).id,
-              ),
-              TE.chain(() => Helpers.toResponse(db)(poll)),
-            ),
-          ),
-
-          // Send the update
-          Responses.update(ctx),
-        )(),
-      ),
-
-      // Maybe log errors
-      RxO.tap(E.mapLeft(console.error)),
+      RxO.flatMap((ctx) => run(db)(ctx)()),
     );
 
-const fetchPoll = (db: Db) => (ctx: SlashCommandContext) =>
+const run = (db: Db) => (ctx: SlashCommandContext) =>
   F.pipe(
-    Helpers.buttonIdDetails(ctx.interaction.data!.custom_id),
+    // Fetch poll from interaction details
+    fetchPoll(db)(ctx.interaction.data!.custom_id),
+
+    // Toggle the vote
+    TE.chainFirst(({ poll, choice }) =>
+      ToggleVote.run(db)(poll)(poll.choices[choice].name)(
+        (ctx.member?.user || ctx.user!).id,
+      ),
+    ),
+
+    // Generate the poll response
+    TE.chain(({ poll }) => Helpers.toResponse(db)(poll)),
+
+    // Send the update
+    Responses.update(ctx),
+
+    // Maybe log errors
+    TE.mapLeft(console.error),
+  );
+
+const fetchPoll = (db: Db) => (customID: string) =>
+  F.pipe(
+    Helpers.buttonIdDetails(customID),
     TE.fromOption(() => "Could not find poll information from button"),
     TE.chain(({ pollID, choice }) =>
       F.pipe(

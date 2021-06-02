@@ -18,7 +18,7 @@ export const handle =
           TE.chain(Helpers.toResponse(db)),
           Responses.message(ctx),
           TE.mapLeft((err) =>
-            console.log("polls/interactions/create.ts", "ERROR", err),
+            console.log("[polls/interactions/create.ts]", "ERROR", err),
           ),
         )(),
       ),

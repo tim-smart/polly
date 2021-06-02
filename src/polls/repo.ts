@@ -42,7 +42,7 @@ export const votes = (db: Db) => (pollID: ObjectId) => {
   return coll.find({ pollID }).toArray();
 };
 
-export const userVote = (db: Db) => (pollID: ObjectId, userID: Snowflake) => {
+export const userVotes = (db: Db) => (pollID: ObjectId, userID: Snowflake) => {
   const coll = votesCollection(db);
   return coll.find({ pollID, userID }).toArray();
 };

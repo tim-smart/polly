@@ -15,7 +15,7 @@ export const run =
   (userID: Snowflake): TE.TaskEither<string, void> =>
     F.pipe(
       TE.tryCatch(
-        () => Repo.userVote(db)(poll._id!, userID),
+        () => Repo.userVotes(db)(poll._id!, userID),
         () => "Could not fetch votes",
       ),
       TE.chain(
