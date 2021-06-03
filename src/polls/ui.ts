@@ -45,6 +45,9 @@ export const embed = (
   anonymousSummary = false,
 ): Embed => ({
   title: poll.question,
+  description: poll.multiple
+    ? "Multiple votes are allowed."
+    : "Only one vote per person is allowed.",
   color: 0x99aab5,
   fields:
     poll.anonymous && !anonymousSummary
