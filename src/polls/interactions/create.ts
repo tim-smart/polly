@@ -16,7 +16,7 @@ const run = (db: Db) => (ctx: SlashCommandContext) =>
   F.pipe(
     CreatePoll.fromContext(db)(ctx),
     TE.chain(Helpers.toResponse(db)),
-    TE.chain(Responses.message(ctx)),
+    Responses.message(ctx),
     TE.mapLeft((err) =>
       console.log("[polls/interactions/create.ts]", "ERROR", err),
     ),
