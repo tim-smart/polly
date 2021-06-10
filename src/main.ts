@@ -4,6 +4,7 @@ import { Api } from "@top-gg/sdk";
 import { createClient, Intents } from "droff";
 import { MongoClient } from "mongodb";
 import * as Topgg from "./topgg";
+import * as Poll from "./polls/command";
 
 async function main() {
   const client = createClient({
@@ -21,8 +22,9 @@ async function main() {
 
   // Register commands
   const commands = client.useSlashCommands();
-  // poll
-  require("./polls/command").register(commands, client, db);
+
+  Poll.register(commands, client, db);
+
   commands.start();
 }
 
