@@ -1,4 +1,4 @@
-import { SlashCommandContext } from "droff/dist/slash-commands/factory";
+import { SlashCommandContext } from "droff-interactions";
 import {
   ApplicationCommandInteractionDataOption,
   Snowflake,

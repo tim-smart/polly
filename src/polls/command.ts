@@ -1,5 +1,5 @@
-import { Client, SlashCommandsHelper } from "droff";
-import { GuildCommandCreate } from "droff/dist/slash-commands/factory";
+import { Client } from "droff";
+import { GuildCommandCreate, SlashCommandsHelper } from "droff-interactions";
 import { ApplicationCommandOptionType } from "droff/dist/types";
 import { Db } from "mongodb";
 import { toOrdinal, toWords } from "number-to-words";

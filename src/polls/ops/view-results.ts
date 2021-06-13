@@ -1,4 +1,4 @@
-import { SnowflakeMap } from "droff/dist/gateway-utils/resources";
+import { SnowflakeMap } from "droff/dist/caches/resources";
 import {
   Guild,
   GuildMember,

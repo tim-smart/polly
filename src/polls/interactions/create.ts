@@ -1,12 +1,12 @@
-import { SlashCommandContext } from "droff/dist/slash-commands/factory";
+import { SlashCommandContext } from "droff-interactions";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";
 import * as Rx from "rxjs";
 import * as RxO from "rxjs/operators";
+import * as Responses from "../../utils/responses";
 import * as Helpers from "../helpers";
 import * as CreatePoll from "../ops/create-poll";
-import * as Responses from "../../utils/responses";
 
 export const handle =
   (db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>

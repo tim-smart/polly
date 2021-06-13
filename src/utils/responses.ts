@@ -1,4 +1,4 @@
-import { SlashCommandContext } from "droff/dist/slash-commands/factory";
+import { SlashCommandContext } from "droff-interactions";
 import { InteractionApplicationCommandCallbackDatum } from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";

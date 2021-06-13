@@ -1,5 +1,6 @@
-import { Client, SlashCommandContext } from "droff";
-import { SnowflakeMap } from "droff/dist/gateway-utils/resources";
+import { Client } from "droff";
+import { SlashCommandContext } from "droff-interactions";
+import { SnowflakeMap } from "droff/dist/caches/resources";
 import {
   Guild,
   InteractionApplicationCommandCallbackDatum,

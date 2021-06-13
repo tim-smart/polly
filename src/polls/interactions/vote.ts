@@ -1,4 +1,4 @@
-import { SlashCommandContext } from "droff";
+import { SlashCommandContext } from "droff-interactions";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";

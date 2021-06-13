@@ -1,12 +1,12 @@
-import { SlashCommandContext } from "droff/dist/slash-commands/factory";
-import * as O from "fp-ts/Option";
-import * as Im from "immutable";
-import * as F from "fp-ts/function";
-import * as Arr from "fp-ts/Array";
+import { SlashCommandContext } from "droff-interactions";
 import {
   ApplicationCommandInteractionDataOption,
   ApplicationCommandOptionType,
 } from "droff/dist/types";
+import * as Arr from "fp-ts/Array";
+import * as F from "fp-ts/function";
+import * as O from "fp-ts/Option";
+import * as Im from "immutable";
 
 export const findSubCommand =
   (name: string) =>
