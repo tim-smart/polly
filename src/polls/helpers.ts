@@ -1,3 +1,4 @@
+import { UI as Components } from "droff-helpers";
 import {
   InteractionApplicationCommandCallbackDatum,
   Snowflake,
@@ -9,7 +10,6 @@ import * as Im from "immutable";
 import { Db, ObjectId } from "mongodb";
 import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
-import * as Components from "../utils/components";
 import * as Repo from "./repo";
 import * as UI from "./ui";
 

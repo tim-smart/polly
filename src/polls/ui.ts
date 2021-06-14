@@ -11,14 +11,14 @@ import * as Im from "immutable";
 import * as R from "remeda";
 import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
-import * as Components from "../utils/components";
 import * as Helpers from "./helpers";
+import { UI } from "droff-helpers";
 
 export const buttons = (poll: Poll): Component[][] =>
   F.pipe(
     [
       ...poll.choices.map((choice, index) =>
-        Components.button({
+        UI.button({
           custom_id: Helpers.buttonId(poll, index),
           label: choice.name,
         }),
@@ -27,7 +27,7 @@ export const buttons = (poll: Poll): Component[][] =>
       // Add view results button to anonymous polls
       ...(poll.anonymous
         ? [
-            Components.button({
+            UI.button({
               custom_id: Helpers.resultsId(poll),
               label: "View results",
               style: ButtonStyle.SECONDARY,
