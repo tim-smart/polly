@@ -13,6 +13,7 @@ import { Poll } from "../../models/Poll";
 import * as Helpers from "../helpers";
 import * as Repo from "../repo";
 import * as Ui from "../ui";
+import { Permissions } from "droff-helpers";
 
 export const run =
   (db: Db) =>
@@ -34,6 +35,8 @@ export const run =
       TE.map(([votes, votesMap]) => Ui.embed(poll, votes, votesMap, true)),
     );
 
+const hasAdmin = Permissions.has(PermissionFlag.ADMINISTRATOR);
+
 const hasPermission =
   (poll: Poll, guild: Guild, roles: SnowflakeMap<Role>) =>
   (member: GuildMember) => {
@@ -42,7 +45,7 @@ const hasPermission =
 
     const isAdmin = member.roles
       .map((id) => roles.get(id)!)
-      .some((role) => BigInt(role.permissions) & PermissionFlag.ADMINISTRATOR);
+      .some((role) => hasAdmin(role.permissions));
     const isOwner = guild.owner_id === userID;
 
     return isAdmin || isOwner;
