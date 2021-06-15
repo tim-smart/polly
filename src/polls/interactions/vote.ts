@@ -41,11 +41,7 @@ const fetchPoll = (db: Db) => (customID: string) =>
     TE.fromOption(() => "Could not find poll information from button"),
     TE.chain(({ pollID, choice }) =>
       F.pipe(
-        TE.tryCatch(
-          () => Repo.get(db)(pollID),
-          () => "Could not load poll from repository",
-        ),
-        TE.chain(TE.fromOption(() => "Poll not found")),
+        Repo.get(db)(pollID),
         TE.map((poll) => ({ poll, choice })),
       ),
     ),

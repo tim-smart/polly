@@ -51,10 +51,7 @@ export const votesMap = (poll: Poll, votes: Vote[]) => {
 
 export const toResponse = (db: Db) => (poll: Poll) =>
   F.pipe(
-    TE.tryCatch(
-      () => Repo.votes(db)(poll._id!),
-      () => "Could not fetch votes",
-    ),
+    Repo.votes(db)(poll._id!),
     TE.map((votes) => [votes, votesMap(poll, votes)] as const),
     TE.map(
       ([votes, votesMap]): InteractionApplicationCommandCallbackDatum => ({

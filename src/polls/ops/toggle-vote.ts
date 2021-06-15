@@ -14,10 +14,7 @@ export const run =
   (option: string) =>
   (userID: Snowflake): TE.TaskEither<string, void> =>
     F.pipe(
-      TE.tryCatch(
-        () => Repo.userVotes(db)(poll._id!, userID),
-        () => "Could not fetch votes",
-      ),
+      Repo.userVotes(db)(poll._id!, userID),
       TE.chain(
         actuallyToggle(db)(poll.multiple, {
           pollID: poll._id!,
@@ -32,16 +29,9 @@ const actuallyToggle =
     F.pipe(
       votes,
       Arr.findFirst((v) => v.option === vote.option),
-      O.fold(
-        () =>
-          TE.tryCatch<string, void>(
-            () => Repo.insertVote(db)(multiple)(vote).then(),
-            () => "Could not add vote",
-          ),
-        (vote) =>
-          TE.tryCatch(
-            () => Repo.deleteVote(db)(vote._id!),
-            () => "Could not remove vote",
-          ),
+      O.foldW(
+        () => Repo.insertVote(db)(multiple)(vote),
+        (vote) => Repo.deleteVote(db)(vote._id!),
       ),
+      TE.map((_: any) => {}),
     );

@@ -47,13 +47,7 @@ const fetchPoll = (db: Db) => (ctx: SlashCommandContext) =>
   F.pipe(
     Helpers.resultsIdDetails(ctx.interaction.data!.custom_id),
     TE.fromOption(() => "Could not extract poll information from custom_id"),
-    TE.chain(
-      TE.tryCatchK(
-        ({ pollID }) => Repo.get(db)(pollID),
-        () => "Could not load poll from repository",
-      ),
-    ),
-    TE.chain(TE.fromOption(() => "Poll not found")),
+    TE.chain(({ pollID }) => Repo.get(db)(pollID)),
   );
 
 const createResponse =

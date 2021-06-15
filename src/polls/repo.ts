@@ -1,6 +1,7 @@
 import { Snowflake } from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import * as TE from "fp-ts/TaskEither";
 import { Db, ObjectId } from "mongodb";
 import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
@@ -8,41 +9,90 @@ import { Vote } from "../models/Vote";
 const collection = (db: Db) => db.collection<Poll>("polls");
 const votesCollection = (db: Db) => db.collection<Vote>("votes");
 
-export const insert =
-  (db: Db) =>
-  (poll: Poll): Promise<Poll> =>
-    F.pipe(collection(db), (c) => c.insertOne(poll)).then(
-      (result) => result.ops[0],
-    );
-
-export const get = (db: Db) => (pollId: ObjectId) => {
+export const insert = (db: Db) => {
   const coll = collection(db);
-  return coll.findOne({ _id: pollId }).then(O.fromNullable);
+  return F.flow(
+    TE.tryCatchK(
+      (poll: Poll) => coll.insertOne(poll),
+      () => "Could not insert poll",
+    ),
+    TE.map((result) => result.ops[0]),
+  );
 };
 
-export const insertVote =
-  (db: Db) => (multiple: boolean) => async (vote: Vote) => {
-    const coll = votesCollection(db);
+export const get = (db: Db) => {
+  const coll = collection(db);
 
-    if (!multiple) {
-      await coll.deleteMany({ pollID: vote.pollID, userID: vote.userID });
-    }
-
-    const result = await coll.insertOne(vote);
-    return result.ops[0];
-  };
-
-export const deleteVote = (db: Db) => async (voteId: ObjectId) => {
-  const coll = votesCollection(db);
-  await coll.deleteOne({ _id: voteId });
+  return F.flow(
+    TE.tryCatchK(
+      (pollId: ObjectId) => coll.findOne({ _id: pollId }),
+      (err) => `Could not get poll: ${err}`,
+    ),
+    TE.map(O.fromNullable),
+    TE.chain(TE.fromOption(() => "Poll not found")),
+  );
 };
 
-export const votes = (db: Db) => (pollID: ObjectId) => {
+export const insertVote = (db: Db) => {
   const coll = votesCollection(db);
-  return coll.find({ pollID }).toArray();
+
+  return (multiple: boolean) => (vote: Vote) =>
+    F.pipe(
+      TE.right(vote),
+
+      TE.chainFirst(
+        TE.tryCatchK(
+          (vote: Vote) =>
+            multiple
+              ? coll
+                  .deleteMany({ pollID: vote.pollID, userID: vote.userID })
+                  .then(() => {})
+              : Promise.resolve(),
+          (err) => `Could not remove previous votes from user: ${err}`,
+        ),
+      ),
+
+      TE.chain(
+        TE.tryCatchK(
+          (vote) => coll.insertOne(vote),
+          () => "Could not insert vote",
+        ),
+      ),
+
+      TE.map((result) => result.ops[0]),
+    );
 };
 
-export const userVotes = (db: Db) => (pollID: ObjectId, userID: Snowflake) => {
+export const deleteVote = (db: Db) => {
   const coll = votesCollection(db);
-  return coll.find({ pollID, userID }).toArray();
+
+  return F.flow(
+    TE.tryCatchK(
+      (voteId: ObjectId) => coll.deleteOne({ _id: voteId }),
+      (err) => `Could not delete vote: ${err}`,
+    ),
+  );
+};
+
+export const votes = (db: Db) => {
+  const coll = votesCollection(db);
+
+  return F.flow(
+    TE.tryCatchK(
+      (pollID: ObjectId) => coll.find({ pollID }).toArray(),
+      (err) => `Could not find votes: ${err}`,
+    ),
+  );
+};
+
+export const userVotes = (db: Db) => {
+  const coll = votesCollection(db);
+
+  return F.flow(
+    TE.tryCatchK(
+      (pollID: ObjectId, userID: Snowflake) =>
+        coll.find({ pollID, userID }).toArray(),
+      (err) => `Could not find votes for user: ${err}`,
+    ),
+  );
 };

@@ -14,13 +14,8 @@ import * as Repo from "../repo";
 export const fromContext = (db: Db) => (ctx: SlashCommandContext) =>
   F.pipe(
     pollFromData(ctx),
-    TE.fromPredicate(O.isSome, () => "Oops! Could not create the poll."),
-    TE.chain(
-      TE.tryCatchK(
-        (poll) => Repo.insert(db)(poll.value),
-        () => "Could not insert poll.",
-      ),
-    ),
+    TE.fromOption(() => "Oops! Could not create the poll."),
+    TE.chain(Repo.insert(db)),
   );
 
 const pollFromData = (ctx: SlashCommandContext) =>
