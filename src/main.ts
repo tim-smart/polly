@@ -6,6 +6,7 @@ import { MongoClient } from "mongodb";
 import * as Topgg from "./topgg";
 import * as Poll from "./polls/command";
 import * as Interactions from "droff-interactions";
+import * as Rx from "rxjs";
 
 async function main() {
   const client = createClient({
@@ -20,15 +21,20 @@ async function main() {
   const db = mongo.db(process.env.MONGODB_DB!);
   const topgg = new Api(process.env.TOPGG_TOKEN!);
 
-  // Send stats to top.gg
-  Topgg.postStats$(client, topgg).subscribe();
-
-  // Register commands
+  // Create interactions helper
   const commands = Interactions.create(client);
 
-  Poll.register(commands, client, db);
+  Rx.merge(
+    // Send stats to top.gg
+    Topgg.postStats$(client, topgg),
 
-  commands.start();
+    // Start client and interactions
+    client.effects$,
+    commands.effects$,
+
+    // Register commands
+    Poll.register(commands, client, db),
+  ).subscribe();
 }
 
 main();

@@ -6,6 +6,7 @@ import { toOrdinal, toWords } from "number-to-words";
 import * as Create from "./interactions/create";
 import * as Results from "./interactions/results";
 import * as Vote from "./interactions/vote";
+import * as Rx from "rxjs";
 
 const command: GuildCommandCreate = {
   name: "poll",
@@ -62,19 +63,14 @@ export const register = (
   commands: SlashCommandsHelper,
   client: Client,
   db: Db,
-) => {
-  // Poll creation command
-  commands.guild(command).pipe(Create.handle(db)).subscribe();
+) =>
+  Rx.merge(
+    // Poll creation command
+    commands.guild(command).pipe(Create.handle(db)),
 
-  // Handle votes
-  commands
-    .component(/^vote_/)
-    .pipe(Vote.handle(db))
-    .subscribe();
+    // Handle votes
+    commands.component(/^vote_/).pipe(Vote.handle(db)),
 
-  // Handle results
-  commands
-    .component(/^results_/)
-    .pipe(Results.handle(client, db))
-    .subscribe();
-};
+    // Handle results
+    commands.component(/^results_/).pipe(Results.handle(client, db)),
+  );

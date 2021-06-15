@@ -506,30 +506,30 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-droff-helpers@^0.1.2:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.1.3.tgz#486126386c60b313062e83a0f9f34f13eee90cf2"
-  integrity sha512-r7Vt6obiF8cWuXN1bv7gzx4setPRtxHFWCOGd8FCtUTGMyMIWya503ZWTGoTDN+YtdgXWHUCH+C+yZGPhBFAqw==
+droff-helpers@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.2.0.tgz#05dfdbea8a4f9049fe8a4b5ecc8462435f7a8dc4"
+  integrity sha512-JCaJIPJ2p99/j7sFEsOG+z1yOVEaYsc8KPLIdjwuAOY50HjnYeIvUXI7ZOSWs0AzMTs//IJWqndpArs8wLzWwA==
   dependencies:
-    droff "^0.16.1"
+    droff "^0.17.0"
     fp-ts "^2.10.5"
     rxjs "^7.1.0"
 
-droff-interactions@^0.1.0:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.1.7.tgz#1f31a45350052bb48b7dfe99d739b531f535d1a7"
-  integrity sha512-feyg2e6mjt8/rcHsEhksSynUvzy4ItF0X+l8zNWsCWEve3sLDWNJhCeDJO8jgI+ClV1kADcFosx8ky2i13+PSQ==
+droff-interactions@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.2.0.tgz#dd19cb833ee6c711ec25a617269d0b463fa17af4"
+  integrity sha512-genFATUgU2xYcJ0gjXF9X1hsKb+966ThZHUzruSeYzrgYzl1Gri8WaM6nvr99hP2s7cAR6naSJQKZcWOQY5DBg==
   dependencies:
-    droff "^0.16.1"
+    droff "^0.17.0"
     fp-ts "^2.10.5"
     immutable "^4.0.0-rc.12"
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
-droff@^0.16.1:
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.16.1.tgz#099b79bb4ab26b9b0ccacf07189c671ef488a461"
-  integrity sha512-9WEQWE9NKYr3eV40Ro8s9+rUSrURqUXp/gjjM3SrkS1vIXd9+h2CeAfTfq+Z6D1L268qns+s6XY7cTnmJdodTQ==
+droff@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.17.0.tgz#8d7414f275680df5c0bb935c00987fd624d3b272"
+  integrity sha512-teSU+thoE9yG5UMhdRnK5zyT5jAKhWUDK6OSna8jHPq0v1yfQzXGTd7eKzpIOzCb96XV75JsfopXO3F7EgfM8g==
   dependencies:
     axios "^0.21.1"
     fp-ts "^2.10.5"
