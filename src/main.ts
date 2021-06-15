@@ -28,9 +28,8 @@ async function main() {
     // Send stats to top.gg
     Topgg.postStats$(client, topgg),
 
-    // Start client and interactions
+    // Start client
     client.effects$,
-    commands.effects$,
 
     // Register commands
     Poll.register(commands, client, db),
