@@ -1,14 +1,14 @@
 import { Client } from "droff";
-import { GuildCommandCreate, SlashCommandsHelper } from "droff-interactions";
+import { GlobalCommand, SlashCommandsHelper } from "droff-interactions";
 import { ApplicationCommandOptionType } from "droff/dist/types";
 import { Db } from "mongodb";
 import { toOrdinal, toWords } from "number-to-words";
+import * as Rx from "rxjs";
 import * as Create from "./interactions/create";
 import * as Results from "./interactions/results";
 import * as Vote from "./interactions/vote";
-import * as Rx from "rxjs";
 
-const command: GuildCommandCreate = {
+const command: GlobalCommand = {
   name: "poll",
   description: "Creates a new poll",
   options: [
@@ -66,7 +66,9 @@ export const register = (
 ) =>
   Rx.merge(
     // Poll creation command
-    commands.guild(command).pipe(Create.handle(db)),
+    commands
+      .global(command, process.env.CREATE_GLOBAL_COMMANDS === "true")
+      .pipe(Create.handle(db)),
 
     // Handle votes
     commands.component(/^vote_/).pipe(Vote.handle(db)),
