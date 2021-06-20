@@ -40,17 +40,17 @@ export const insertVote = (db: Db) => {
     F.pipe(
       TE.right(vote),
 
-      TE.chainFirst(
-        TE.tryCatchK(
-          (vote: Vote) =>
-            multiple
-              ? coll
+      multiple
+        ? F.identity
+        : TE.chainFirst(
+            TE.tryCatchK(
+              (vote: Vote) =>
+                coll
                   .deleteMany({ pollID: vote.pollID, userID: vote.userID })
-                  .then(() => {})
-              : Promise.resolve(),
-          (err) => `Could not remove previous votes from user: ${err}`,
-        ),
-      ),
+                  .then(() => {}),
+              (err) => `Could not remove previous votes from user: ${err}`,
+            ),
+          ),
 
       TE.chain(
         TE.tryCatchK(
