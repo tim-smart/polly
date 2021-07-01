@@ -1,10 +1,5 @@
-import {
-  ButtonStyle,
-  Component,
-  Embed,
-  EmbedField,
-  Snowflake,
-} from "droff/dist/types";
+import { UI } from "droff-helpers";
+import { ButtonStyle, Embed, EmbedField, Snowflake } from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import * as Im from "immutable";
@@ -12,9 +7,8 @@ import * as R from "remeda";
 import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
 import * as Helpers from "./helpers";
-import { UI } from "droff-helpers";
 
-export const buttons = (poll: Poll): Component[][] =>
+export const buttons = (poll: Poll) =>
   F.pipe(
     [
       ...poll.choices.map((choice, index) =>
@@ -51,28 +45,36 @@ export const embed = (
   color: 0x99aab5,
   fields:
     poll.anonymous && !anonymousSummary
-      ? [
-          {
-            name: `Total votes: ${votes.length}`,
-            value: "Votes are anonymous",
-          },
-        ]
-      : votesMap
-          .entrySeq()
-          .map(
-            ([choice, votes]): EmbedField => ({
-              name: `${choice} (${votes.count()})`,
-              value: F.pipe(
-                votes,
-                O.fromPredicate(() => anonymousSummary),
-                O.map(() => "Votes are anonymous"),
-                O.alt(() => voteSummary(votes)),
-                O.getOrElse(() => "No votes"),
-              ),
-            }),
-          )
-          .toArray(),
+      ? anonymousFields(votes)
+      : summaryFields(votesMap, anonymousSummary),
 });
+
+const anonymousFields = (votes: Vote[]): EmbedField[] => [
+  {
+    name: `Total votes: ${votes.length}`,
+    value: "Votes are anonymous",
+  },
+];
+
+const summaryFields = (
+  votesMap: Im.OrderedMap<string, Im.Set<Snowflake>>,
+  anonymousSummary = false,
+): EmbedField[] =>
+  votesMap
+    .entrySeq()
+    .map(
+      ([choice, votes]): EmbedField => ({
+        name: `${choice} (${votes.count()})`,
+        value: F.pipe(
+          votes,
+          O.fromPredicate(() => anonymousSummary),
+          O.map(() => "Votes are anonymous"),
+          O.alt(() => voteSummary(votes)),
+          O.getOrElse(() => "No votes"),
+        ),
+      }),
+    )
+    .toArray();
 
 export const voteSummary = (votes: Im.Set<Snowflake>) =>
   F.pipe(
