@@ -50,12 +50,14 @@ const command: GlobalCommand = {
         },
       ],
     },
-    ...[...Array(25 - 3).keys()].map((index) => ({
-      type: ApplicationCommandOptionType.STRING,
-      name: `choice-${toWords(index + 1)}`,
-      description: `The ${toOrdinal(index + 1)} choice a person can vote for`,
-      required: index <= 1,
-    })),
+    ...Array(25 - 3)
+      .fill(0)
+      .map((_, index) => ({
+        type: ApplicationCommandOptionType.STRING,
+        name: `choice-${toWords(index + 1)}`,
+        description: `The ${toOrdinal(index + 1)} choice a person can vote for`,
+        required: index <= 1,
+      })),
   ],
 };
 
