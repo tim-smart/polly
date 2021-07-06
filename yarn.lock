@@ -64,9 +64,9 @@
   integrity sha512-FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==
 
 "@types/bson@*":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@types/bson/-/bson-4.0.3.tgz#30889d2ffde6262abbe38659364c631454999fbf"
-  integrity sha512-mVRvYnTOZJz3ccpxhr3wgxVmSeiYinW+zlzQz3SXWaJmD1DuL05Jeq7nKw3SnbKmbleW5qrLG5vdyWe/A9sXhw==
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@types/bson/-/bson-4.0.4.tgz#79d2d26e81070044db2a1a8b2cc2f673c840e1e5"
+  integrity sha512-awqorHvQS0DqxkHQ/FxcPX9E+H7Du51Qw/2F+5TBMSaE3G0hm+8D3eXJ6MAzFw75nE8V7xF0QvzUSdxIjJb/GA==
   dependencies:
     "@types/node" "*"
 
@@ -505,29 +505,29 @@ dotenv@^10.0.0:
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
 droff-helpers@^0.2.0:
-  version "0.2.11"
-  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.2.11.tgz#3dc6a09f1748d93111e789359359f6c821619e24"
-  integrity sha512-5GPvGDNc83azCcI2hOFbE6c7l8S1IdNyqsLr+ARORduQ0RKFaAGlknJ0mn3Xj/eqYNTUP2ff9ki9IdBVEv+HmA==
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.2.12.tgz#51f24fb81f69149e6d21e572aa246491e5e43efa"
+  integrity sha512-gz5KxBjKCWXBCUf74cky+7GFybO3sem00FFZgKolLoDcJCrknNBigl7K4avpSgPdv+Kq7ot983k00yTZnA1p4Q==
   dependencies:
-    droff "^0.17.9"
+    droff "^0.17.10"
     fp-ts "^2.10.5"
     rxjs "^7.1.0"
 
 droff-interactions@^0.2.0:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.2.10.tgz#6e6e9b35ba5883ac4a85222667ed322dc9028617"
-  integrity sha512-iwgQSzA52OXPL8Kc+cJwnKSD2ScNN+HseL424BdiyIb3A97r5KJYJYRujb6wkqQWv3AzMBQsszibG2WcmnK8uA==
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.2.11.tgz#66000eac6c91111934e9de70b7d554712c0af4ff"
+  integrity sha512-ZAh0NB+HMdFyF1II0a23+5QPj/D6bwd0QyARlaqQ7kAIUhR4ignaSTLpD73NbAMRzt4bsUSkdg6PKcoCy10qDQ==
   dependencies:
-    droff "^0.17.9"
+    droff "^0.17.10"
     fp-ts "^2.10.5"
     immutable "^4.0.0-rc.12"
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
-droff@^0.17.0, droff@^0.17.9:
-  version "0.17.9"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.17.9.tgz#62fd14834776470ff20aef78a6a52525176559c1"
-  integrity sha512-8h9ul7xS7NBIj0yeQdEqPgd5Kw0CnQkqdmf1PmPr0YD7SNGiwX+b0ROh40DLW3ptix1FlySIkITEsITIRCgUOQ==
+droff@^0.17.0, droff@^0.17.10:
+  version "0.17.10"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.17.10.tgz#05ce19982da389db52eff9724402aed1986b2925"
+  integrity sha512-z1ys38MCprCR+0X+noqngvBiw8GXcFeWk37S4FT0GayT81mAQvea8fAlEinohuiKCfqpEk1TCWbUP9DjWTqR/g==
   dependencies:
     axios "^0.21.1"
     fp-ts "^2.10.5"
@@ -1035,9 +1035,9 @@ minimist@^1.2.0:
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
 mongodb@^3.6.9:
-  version "3.6.9"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.9.tgz#4889cf529724267d393a18275d6cf19d71905b1d"
-  integrity sha512-1nSCKgSunzn/CXwgOWgbPHUWOO5OfERcuOWISmqd610jn0s8BU9K4879iJVabqgpPPbA6hO7rG48eq+fGED3Mg==
+  version "3.6.10"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.10.tgz#f10e990113c86b195c8af0599b9b3a90748b6ee4"
+  integrity sha512-fvIBQBF7KwCJnDZUnFFy4WqEFP8ibdXeFANnylW19+vOwdjOAvqIzPdsNCEMT6VKTHnYu4K64AWRih0mkFms6Q==
   dependencies:
     bl "^2.2.1"
     bson "^1.1.4"
