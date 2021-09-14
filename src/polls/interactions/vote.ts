@@ -16,7 +16,7 @@ export const handle =
 const run = (db: Db) => (ctx: SlashCommandContext) =>
   F.pipe(
     // Fetch poll from interaction details
-    fetchPoll(db)(ctx.interaction.data!.custom_id),
+    fetchPoll(db)(ctx.interaction.data!.custom_id || ""),
 
     // Toggle the vote
     TE.chainFirst(({ poll, choice }) =>

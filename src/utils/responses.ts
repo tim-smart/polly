@@ -1,5 +1,5 @@
 import { SlashCommandContext } from "droff-interactions";
-import { InteractionApplicationCommandCallbackDatum } from "droff/dist/types";
+import { InteractionCallbackDatum } from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
 
@@ -7,11 +7,11 @@ export const respond =
   (
     fn: (
       ctx: SlashCommandContext,
-      response: InteractionApplicationCommandCallbackDatum,
+      response: InteractionCallbackDatum,
     ) => Promise<void>,
   ) =>
   (ctx: SlashCommandContext) =>
-  (input: TE.TaskEither<string, InteractionApplicationCommandCallbackDatum>) =>
+  (input: TE.TaskEither<string, InteractionCallbackDatum>) =>
     F.pipe(
       input,
       TE.fold(

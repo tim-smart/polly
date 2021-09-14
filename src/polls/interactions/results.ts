@@ -1,11 +1,7 @@
 import { Client } from "droff";
 import { SlashCommandContext } from "droff-interactions";
 import { SnowflakeMap } from "droff/dist/caches/resources";
-import {
-  Guild,
-  InteractionApplicationCommandCallbackDatum,
-  Role,
-} from "droff/dist/types";
+import { Guild, InteractionCallbackDatum, Role } from "droff/dist/types";
 import * as E from "fp-ts/Either";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
@@ -45,7 +41,7 @@ export const handle =
 
 const fetchPoll = (db: Db) => (ctx: SlashCommandContext) =>
   F.pipe(
-    Helpers.resultsIdDetails(ctx.interaction.data!.custom_id),
+    Helpers.resultsIdDetails(ctx.interaction.data!.custom_id || ""),
     TE.fromOption(() => "Could not extract poll information from custom_id"),
     TE.chain(({ pollID }) => Repo.get(db)(pollID)),
   );
@@ -61,7 +57,7 @@ const createResponse =
     F.pipe(
       ViewResults.run(db)(poll)(context.interaction, guild, roles),
       TE.map(
-        (embed): InteractionApplicationCommandCallbackDatum => ({
+        (embed): InteractionCallbackDatum => ({
           embeds: [embed],
         }),
       ),
