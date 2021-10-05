@@ -1,5 +1,5 @@
 import { Client } from "droff";
-import { GlobalCommand, SlashCommandsHelper } from "droff-interactions";
+import { GlobalCommand, InteractionsHelper } from "droff-interactions";
 import { ApplicationCommandOptionType } from "droff/dist/types";
 import { Db } from "mongodb";
 import { toOrdinal, toWords } from "number-to-words";
@@ -62,7 +62,7 @@ const command: GlobalCommand = {
 };
 
 export const register = (
-  commands: SlashCommandsHelper,
+  commands: InteractionsHelper,
   client: Client,
   db: Db,
 ) =>

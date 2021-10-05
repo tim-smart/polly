@@ -1,4 +1,4 @@
-import { SlashCommandContext } from "droff-interactions";
+import { InteractionContext } from "droff-interactions";
 import {
   ApplicationCommandInteractionDataOption,
   ApplicationCommandOptionType,
@@ -10,7 +10,7 @@ import * as Im from "immutable";
 
 export const findSubCommand =
   (name: string) =>
-  ({ interaction }: SlashCommandContext) =>
+  ({ interaction }: InteractionContext) =>
     F.pipe(
       O.fromNullable(interaction.data?.options),
       O.chain(

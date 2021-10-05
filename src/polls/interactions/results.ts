@@ -1,5 +1,5 @@
 import { Client } from "droff";
-import { SlashCommandContext } from "droff-interactions";
+import { InteractionContext } from "droff-interactions";
 import { SnowflakeMap } from "droff/dist/caches/resources";
 import { Guild, InteractionCallbackDatum, Role } from "droff/dist/types";
 import * as E from "fp-ts/Either";
@@ -15,7 +15,7 @@ import * as ViewResults from "../ops/view-results";
 import * as Repo from "../repo";
 
 export const handle =
-  (client: Client, db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>
+  (client: Client, db: Db) => (source$: Rx.Observable<InteractionContext>) =>
     F.pipe(
       source$,
 
@@ -39,7 +39,7 @@ export const handle =
       RxO.tap(E.mapLeft(console.error)),
     );
 
-const fetchPoll = (db: Db) => (ctx: SlashCommandContext) =>
+const fetchPoll = (db: Db) => (ctx: InteractionContext) =>
   F.pipe(
     Helpers.resultsIdDetails(ctx.interaction.data!.custom_id || ""),
     TE.fromOption(() => "Could not extract poll information from custom_id"),
@@ -49,7 +49,7 @@ const fetchPoll = (db: Db) => (ctx: SlashCommandContext) =>
 const createResponse =
   (db: Db) =>
   (
-    context: SlashCommandContext,
+    context: InteractionContext,
     poll: Poll,
     guild: Guild,
     roles: SnowflakeMap<Role>,

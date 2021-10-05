@@ -1,4 +1,4 @@
-import { SlashCommandContext } from "droff-interactions";
+import { InteractionContext } from "droff-interactions";
 import {
   ApplicationCommandInteractionDataOption,
   Snowflake,
@@ -11,14 +11,14 @@ import { Choice, Poll } from "../../models/Poll";
 import * as Commands from "../../utils/commands";
 import * as Repo from "../repo";
 
-export const fromContext = (db: Db) => (ctx: SlashCommandContext) =>
+export const fromContext = (db: Db) => (ctx: InteractionContext) =>
   F.pipe(
     pollFromData(ctx),
     TE.fromOption(() => "Oops! Could not create the poll."),
     TE.chain(Repo.insert(db)),
   );
 
-const pollFromData = (ctx: SlashCommandContext) =>
+const pollFromData = (ctx: InteractionContext) =>
   F.pipe(
     O.fromNullable(ctx.interaction.data),
     O.map(({ options }) =>

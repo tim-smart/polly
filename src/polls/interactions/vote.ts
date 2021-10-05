@@ -1,4 +1,4 @@
-import { SlashCommandContext } from "droff-interactions";
+import { InteractionContext } from "droff-interactions";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";
@@ -10,10 +10,10 @@ import * as ToggleVote from "../ops/toggle-vote";
 import * as Repo from "../repo";
 
 export const handle =
-  (db: Db) => (source$: Rx.Observable<SlashCommandContext>) =>
+  (db: Db) => (source$: Rx.Observable<InteractionContext>) =>
     F.pipe(source$, RxO.flatMap(run(db)));
 
-const run = (db: Db) => (ctx: SlashCommandContext) =>
+const run = (db: Db) => (ctx: InteractionContext) =>
   F.pipe(
     // Fetch poll from interaction details
     fetchPoll(db)(ctx.interaction.data!.custom_id || ""),
