@@ -1,3 +1,4 @@
+import { Interactions } from "droff-helpers";
 import { InteractionContext } from "droff-interactions";
 import {
   ApplicationCommandInteractionDataOption,
@@ -8,7 +9,6 @@ import * as O from "fp-ts/Option";
 import * as TE from "fp-ts/TaskEither";
 import { Db } from "mongodb";
 import { Choice, Poll } from "../../models/Poll";
-import * as Commands from "../../utils/commands";
 import * as Repo from "../repo";
 
 export const fromContext = (db: Db) => (ctx: InteractionContext) =>
@@ -35,7 +35,7 @@ const pollFromOptions = (
   ownerID: Snowflake,
   options: ApplicationCommandInteractionDataOption[],
 ): Poll =>
-  F.pipe(Commands.optionsMap(options), (map) => {
+  F.pipe(Interactions.transformOptions(options), (map) => {
     const choices = options
       .filter(({ name }) => name.startsWith("choice-"))
       .map(({ value }): Choice => ({ name: value! }));

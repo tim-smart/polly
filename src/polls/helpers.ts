@@ -3,7 +3,7 @@ import { InteractionCallbackDatum, Snowflake } from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/lib/TaskEither";
 import * as O from "fp-ts/Option";
-import * as Im from "immutable";
+import Im from "immutable";
 import { Db, ObjectId } from "mongodb";
 import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
