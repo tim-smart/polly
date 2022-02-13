@@ -540,30 +540,30 @@ dotenv@^10.0.0:
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
 droff-helpers@^0.3.0:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.3.1.tgz#1d0bc673deef848b6da26ca66325d7ea60c8514b"
-  integrity sha512-IrrLXzkhfoHkbRQl3aEztQ3R0JFspjYz87Sy43oss0Qm3c1TVn0h1dwEOChx/d+IvbkUfE4yJ70ZgkmBQVoH+g==
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.3.2.tgz#d37fe40cbb06dade7570f27738d8ddccf327dc25"
+  integrity sha512-jEvmfELeD/18Fie4Oy1oD7YoOpGuOPW0erP+oWp5ugUcL0dJWHbdG0lyxQzbjJVn/ANA/c4W7oPsdBrUZhg0Qg==
   dependencies:
-    droff "^0.18.1"
+    droff "^0.18.2"
     fp-ts "^2.10.5"
     immutable "*"
     rxjs "^7.1.0"
 
 droff-interactions@^0.4.0:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.4.2.tgz#27004d4029235ae8704a19fcb640498edf8c820a"
-  integrity sha512-/ppSVz24jf/gU7u7FozUVWh03pmElGTCEa5nHCvGQd+CwFuQozCPfSvJ3d7ds0mpCupE4o52GzmIZ1w/4YKCXQ==
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.4.3.tgz#9e48c660d1052ef5f13d00f1f19e71ebf86ed333"
+  integrity sha512-2lbaA9Id2Dc+s1X2nRuOcymRiXEixTYQzl8yswpygUpWZamAJIYUR3PLuYbs3GRQlpXVlDhi51dMOn+HEMMxKw==
   dependencies:
-    droff "^0.18.1"
+    droff "^0.18.2"
     fp-ts "^2.10.5"
     immutable "^4.0.0-rc.12"
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
-droff@^0.18.0, droff@^0.18.1:
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.18.1.tgz#25b02c565dc007593f5b85e4d40bf3db5d7e0d94"
-  integrity sha512-2+rf3Fhalr7148ktEiCEpudQm4G9Gm8L7EhLQA3eA5GccWO6HWQzGTNUpfRRFyW608Kwxdly/nHPL5vbpUdOrQ==
+droff@^0.18.0, droff@^0.18.2:
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.18.2.tgz#34a4a33b8643a684fcdf4da8d6ac863aedb1ffe3"
+  integrity sha512-d+bM74g1NsjweAnz/c77MPd0JvlTiMmzfk9I/VGQW6niAoDwB9wJ/Ce26onDeLHFA0edZkvoB/4MwrCNAxYH8A==
   dependencies:
     axios "^0.21.1"
     fp-ts "^2.10.5"
@@ -1109,9 +1109,9 @@ mimic-response@^1.0.0, mimic-response@^1.0.1:
   integrity sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
 
 minimatch@^3.0.4:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.5.tgz#4da8f1290ee0f0f8e83d60ca69f8f134068604a3"
-  integrity sha512-tUpxzX0VAzJHjLu0xUfFv1gwVp9ba3IOuRAVH2EGuRW8a5emA2FlACLqiT/lDVtS1W+TGNwqz3sWaNyLgDJWuw==
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.6.tgz#4a2cab247c5f4cc03b85813ebbde7ae23a6406a2"
+  integrity sha512-dpxq1Q5/wIfWZjlpjEZMpHWLDIEGKAzfxdWG/vDJs6sX2mtpm0vuysXd9bD/XnMrGc/O14D116bYXsSDBJK2lQ==
   dependencies:
     brace-expansion "^1.1.7"
 
