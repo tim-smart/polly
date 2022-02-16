@@ -1,5 +1,13 @@
 import { UI } from "droff-helpers";
-import { ButtonStyle, Embed, EmbedField, Snowflake } from "droff/dist/types";
+import {
+  ApplicationCommandOption,
+  ApplicationCommandOptionType,
+  ApplicationCommandType,
+  ButtonStyle,
+  Embed,
+  EmbedField,
+  Snowflake,
+} from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import * as Im from "immutable";
@@ -82,3 +90,20 @@ export const voteSummary = (votes: Im.Set<Snowflake>) =>
     O.fromPredicate((v) => !v.isEmpty()),
     O.map((votes) => votes.map((id) => `<@${id}>`).join(", ")),
   );
+
+export const yesNoField = (
+  opts: Pick<ApplicationCommandOption, "name" | "description" | "required">,
+): ApplicationCommandOption => ({
+  ...opts,
+  type: ApplicationCommandOptionType.STRING,
+  choices: [
+    {
+      name: "no",
+      value: "false",
+    },
+    {
+      name: "yes",
+      value: "true",
+    },
+  ],
+});
