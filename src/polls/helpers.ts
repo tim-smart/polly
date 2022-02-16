@@ -1,10 +1,10 @@
 import { UI as Components } from "droff-helpers";
 import { InteractionCallbackDatum, Snowflake } from "droff/dist/types";
 import * as F from "fp-ts/function";
-import * as TE from "fp-ts/lib/TaskEither";
 import * as O from "fp-ts/Option";
+import * as RTE from "fp-ts/ReaderTaskEither";
 import Im from "immutable";
-import { Db, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
 import * as Repo from "./repo";
@@ -46,11 +46,11 @@ export const votesMap = (poll: Poll, votes: Vote[]) => {
   );
 };
 
-export const toResponse = (db: Db) => (poll: Poll) =>
+export const toResponse = (poll: Poll) =>
   F.pipe(
-    Repo.votes(db)(poll._id!),
-    TE.map((votes) => [votes, votesMap(poll, votes)] as const),
-    TE.map(
+    Repo.votes(poll._id!),
+    RTE.map((votes) => [votes, votesMap(poll, votes)] as const),
+    RTE.map(
       ([votes, votesMap]): InteractionCallbackDatum => ({
         embeds: [UI.embed(poll, votes, votesMap)],
         components: Components.grid(UI.buttons(poll)),

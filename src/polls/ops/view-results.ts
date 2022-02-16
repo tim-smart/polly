@@ -1,3 +1,4 @@
+import { Permissions } from "droff-helpers";
 import { SnowflakeMap } from "droff/dist/caches/resources";
 import {
   Guild,
@@ -7,28 +8,30 @@ import {
   Role,
 } from "droff/dist/types";
 import * as F from "fp-ts/function";
-import * as TE from "fp-ts/TaskEither";
-import { Db } from "mongodb";
+import * as RTE from "fp-ts/ReaderTaskEither";
 import { Poll } from "../../models/Poll";
 import * as Helpers from "../helpers";
 import * as Repo from "../repo";
 import * as Ui from "../ui";
-import { Permissions } from "droff-helpers";
 
-export const run =
-  (db: Db) =>
-  (poll: Poll) =>
-  ({ member }: Interaction, guild: Guild, roles: SnowflakeMap<Role>) =>
-    F.pipe(
-      member!,
-      TE.fromPredicate(
-        hasPermission(poll, guild, roles),
-        () => "You need to be the poll owner or an admin to view the results.",
-      ),
-      TE.chain(() => Repo.votes(db)(poll._id!)),
-      TE.map((votes) => [votes, Helpers.votesMap(poll, votes)] as const),
-      TE.map(([votes, votesMap]) => Ui.embed(poll, votes, votesMap, true)),
-    );
+export interface RunOpts {
+  poll: Poll;
+  interaction: Interaction;
+  guild: Guild;
+  roles: SnowflakeMap<Role>;
+}
+
+export const run = ({ poll, interaction: { member }, guild, roles }: RunOpts) =>
+  F.pipe(
+    member!,
+    RTE.fromPredicate(
+      hasPermission(poll, guild, roles),
+      () => "You need to be the poll owner or an admin to view the results.",
+    ),
+    RTE.chain(() => Repo.votes(poll._id!)),
+    RTE.map((votes) => [votes, Helpers.votesMap(poll, votes)] as const),
+    RTE.map(([votes, votesMap]) => Ui.embed(poll, votes, votesMap, true)),
+  );
 
 const hasAdmin = Permissions.has(PermissionFlag.ADMINISTRATOR);
 

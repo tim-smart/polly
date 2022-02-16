@@ -6,16 +6,17 @@ import {
 } from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import * as R from "fp-ts/Reader";
+import * as RTE from "fp-ts/ReaderTaskEither";
 import * as TE from "fp-ts/TaskEither";
-import { Db } from "mongodb";
 import { Choice, Poll } from "../../models/Poll";
 import * as Repo from "../repo";
 
-export const fromContext = (db: Db) => (ctx: InteractionContext) =>
+export const fromContext = (ctx: InteractionContext) =>
   F.pipe(
-    pollFromData(ctx),
-    TE.fromOption(() => "Oops! Could not create the poll."),
-    TE.chain(Repo.insert(db)),
+    R.asks(() => pollFromData(ctx)),
+    R.map(TE.fromOption(() => "Oops! Could not create the poll.")),
+    RTE.chain(Repo.insert),
   );
 
 const pollFromData = (ctx: InteractionContext) =>

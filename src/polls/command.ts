@@ -4,6 +4,7 @@ import { ApplicationCommandOptionType } from "droff/dist/types";
 import { Db } from "mongodb";
 import { toOrdinal, toWords } from "number-to-words";
 import * as Rx from "rxjs";
+import { ClientContext, CommandContext, DbContext } from "../utils/contexts";
 import * as Create from "./interactions/create";
 import * as Results from "./interactions/results";
 import * as Vote from "./interactions/vote";
@@ -61,20 +62,16 @@ const command: GlobalCommand = {
   ],
 };
 
-export const register = (
-  commands: InteractionsHelper,
-  client: Client,
-  db: Db,
-) =>
+export const register = (ctx: DbContext & CommandContext & ClientContext) =>
   Rx.merge(
     // Poll creation command
-    commands
+    ctx.commands
       .global(command, process.env.CREATE_GLOBAL_COMMANDS === "true")
-      .pipe(Create.handle(db)),
+      .pipe(Create.handle(ctx)),
 
     // Handle votes
-    commands.component(/^vote_/).pipe(Vote.handle(db)),
+    ctx.commands.component(/^vote_/).pipe(Vote.handle(ctx)),
 
     // Handle results
-    commands.component(/^results_/).pipe(Results.handle(client, db)),
+    ctx.commands.component(/^results_/).pipe(Results.handle(ctx)),
   );

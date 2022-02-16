@@ -2,11 +2,12 @@ require("dotenv").config();
 
 import { Api } from "@top-gg/sdk";
 import { createClient, Intents } from "droff";
-import { MongoClient } from "mongodb";
-import * as Topgg from "./topgg";
-import * as Poll from "./polls/command";
 import * as Interactions from "droff-interactions";
+import { MongoClient } from "mongodb";
 import * as Rx from "rxjs";
+import * as Poll from "./polls/command";
+import * as Topgg from "./topgg";
+import { createDbContext } from "./utils/contexts";
 
 async function main() {
   const client = createClient({
@@ -24,15 +25,22 @@ async function main() {
   // Create interactions helper
   const commands = Interactions.create(client);
 
-  Rx.merge(
-    // Send stats to top.gg
-    Topgg.postStats$(client, topgg),
+  const ctx = {
+    ...createDbContext(db),
+    client,
+    commands,
+    topgg,
+  };
 
+  Rx.merge(
     // Start client
     client.effects$,
 
+    // Send stats to top.gg
+    Topgg.postStats(ctx),
+
     // Register commands
-    Poll.register(commands, client, db),
+    Poll.register(ctx),
   ).subscribe();
 }
 
