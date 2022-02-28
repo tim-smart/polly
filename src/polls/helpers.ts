@@ -1,5 +1,9 @@
 import { UI as Components } from "droff-helpers";
-import { InteractionCallbackDatum, Snowflake } from "droff/dist/types";
+import {
+  InteractionCallbackDatum,
+  InteractionCallbackMessage,
+  Snowflake,
+} from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import * as RTE from "fp-ts/ReaderTaskEither";
@@ -51,7 +55,7 @@ export const toResponse = (poll: Poll) =>
     Repo.votes(poll._id!),
     RTE.map((votes) => [votes, votesMap(poll, votes)] as const),
     RTE.map(
-      ([votes, votesMap]): InteractionCallbackDatum => ({
+      ([votes, votesMap]): InteractionCallbackMessage => ({
         embeds: [UI.embed(poll, votes, votesMap)],
         components: Components.grid(UI.buttons(poll)),
       }),

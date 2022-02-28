@@ -3,7 +3,12 @@ import { ApplicationCommandOptionType } from "droff/dist/types";
 import * as R from "fp-ts/Reader";
 import { toOrdinal, toWords } from "number-to-words";
 import * as Rx from "rxjs";
-import { ClientContext, CommandContext, DbContext } from "../utils/contexts";
+import {
+  CacheContext,
+  ClientContext,
+  CommandContext,
+  DbContext,
+} from "../utils/contexts";
 import * as Create from "./interactions/create";
 import * as Results from "./interactions/results";
 import * as Vote from "./interactions/vote";
@@ -40,7 +45,9 @@ const command: GlobalCommand = {
   ],
 };
 
-export const register = (ctx: DbContext & CommandContext & ClientContext) => {
+export const register = (
+  ctx: DbContext & CommandContext & ClientContext & CacheContext,
+) => {
   const { commands } = ctx;
 
   return Rx.merge(

@@ -1,27 +1,31 @@
 import { InteractionContext } from "droff-interactions";
-import { InteractionCallbackDatum } from "droff/dist/types";
+import {
+  InteractionCallbackDatum,
+  InteractionCallbackMessage,
+} from "droff/dist/types";
 import * as E from "fp-ts/Either";
 import * as F from "fp-ts/function";
 import * as R from "fp-ts/Reader";
 import * as RTE from "fp-ts/ReaderTaskEither";
 import * as Rx from "rxjs";
 import * as RxO from "rxjs/operators";
-import { ClientContext, DbContext } from "../../utils/contexts";
+import { CacheContext, ClientContext, DbContext } from "../../utils/contexts";
 import * as Responses from "../../utils/responses";
 import * as Helpers from "../helpers";
 import * as ViewResults from "../ops/view-results";
 import * as Repo from "../repo";
 
 export const handle =
-  (ctx: ClientContext & DbContext) =>
+  (ctx: ClientContext & DbContext & CacheContext) =>
   (source$: Rx.Observable<InteractionContext>) =>
     F.pipe(
       source$,
 
-      ctx.client.withCaches({ roles: ctx.client.roles$ })(
-        ({ interaction }) => interaction.guild_id,
-      ),
-      ctx.client.onlyWithGuild(),
+      ctx.client.withCaches({
+        guild: ctx.guildsCache.get,
+        roles: ctx.rolesCache.getForGuild,
+      })(({ interaction }) => interaction.guild_id),
+      ctx.client.onlyWithCacheResults(),
 
       RxO.flatMap(([context, { guild, roles }]) =>
         F.pipe(
@@ -55,7 +59,7 @@ const fetchPoll = (ctx: InteractionContext) =>
 const createResponse = F.flow(
   ViewResults.run,
   RTE.map(
-    (embed): InteractionCallbackDatum => ({
+    (embed): InteractionCallbackMessage => ({
       embeds: [embed],
     }),
   ),

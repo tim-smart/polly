@@ -1,5 +1,9 @@
 import { InteractionContext } from "droff-interactions";
-import { InteractionCallbackDatum, MessageFlag } from "droff/dist/types";
+import {
+  InteractionCallbackDatum,
+  InteractionCallbackMessage,
+  MessageFlag,
+} from "droff/dist/types";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
 
@@ -7,11 +11,11 @@ export const respond =
   (
     fn: (
       ctx: InteractionContext,
-      response: InteractionCallbackDatum,
+      response: InteractionCallbackMessage,
     ) => Promise<void>,
   ) =>
   (ctx: InteractionContext) =>
-  (input: TE.TaskEither<string, InteractionCallbackDatum>) =>
+  (input: TE.TaskEither<string, InteractionCallbackMessage>) =>
     F.pipe(
       input,
       TE.fold(

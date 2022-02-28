@@ -7,7 +7,7 @@ import { MongoClient } from "mongodb";
 import * as Rx from "rxjs";
 import * as Poll from "./polls/command";
 import * as Topgg from "./topgg";
-import { createDbContext } from "./utils/contexts";
+import { createCacheContext, createDbContext } from "./utils/contexts";
 
 async function main() {
   const client = createClient({
@@ -21,12 +21,14 @@ async function main() {
   });
   const db = mongo.db(process.env.MONGODB_DB!);
   const topgg = new Api(process.env.TOPGG_TOKEN!);
+  const [cacheCtx, cacheEffects$] = createCacheContext(client);
 
   // Create interactions helper
   const commands = Interactions.create(client);
 
   const ctx = {
     ...createDbContext(db),
+    ...cacheCtx,
     client,
     commands,
     topgg,
@@ -35,6 +37,7 @@ async function main() {
   Rx.merge(
     // Start client
     client.effects$,
+    cacheEffects$,
 
     // Send stats to top.gg
     Topgg.postStats(ctx),

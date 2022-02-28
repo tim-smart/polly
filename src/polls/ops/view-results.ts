@@ -1,5 +1,4 @@
 import { Permissions } from "droff-helpers";
-import { SnowflakeMap } from "droff/dist/caches/resources";
 import {
   Guild,
   GuildMember,
@@ -18,7 +17,7 @@ export interface RunOpts {
   poll: Poll;
   interaction: Interaction;
   guild: Guild;
-  roles: SnowflakeMap<Role>;
+  roles: Map<string, Role>;
 }
 
 export const run = ({ poll, interaction: { member }, guild, roles }: RunOpts) =>
@@ -36,7 +35,7 @@ export const run = ({ poll, interaction: { member }, guild, roles }: RunOpts) =>
 const hasAdmin = Permissions.has(PermissionFlag.ADMINISTRATOR);
 
 const hasPermission =
-  (poll: Poll, guild: Guild, roles: SnowflakeMap<Role>) =>
+  (poll: Poll, guild: Guild, roles: Map<string, Role>) =>
   (member: GuildMember) => {
     const userID = member!.user!.id;
     if (poll.ownerID === userID) return true;
