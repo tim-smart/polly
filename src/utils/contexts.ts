@@ -23,10 +23,7 @@ export const createCacheContext = (
   const [rolesCache, rolesCache$] = c.rolesCache();
 
   return [
-    {
-      guildsCache,
-      rolesCache,
-    },
+    { guildsCache, rolesCache },
     Rx.merge(guildsCache$, rolesCache$),
   ] as const;
 };

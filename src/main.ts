@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 import { Api } from "@top-gg/sdk";
-import { createClient, Intents } from "droff";
+import { createClient } from "droff";
 import * as Interactions from "droff-interactions";
 import { MongoClient } from "mongodb";
 import * as Rx from "rxjs";
