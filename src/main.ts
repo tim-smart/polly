@@ -12,9 +12,6 @@ import { createCacheContext, createDbContext } from "./utils/contexts";
 async function main() {
   const client = createClient({
     token: process.env.DISCORD_BOT_TOKEN!,
-    gateway: {
-      intents: Intents.GUILDS,
-    },
   });
   const mongo = await MongoClient.connect(process.env.MONGODB_URI!, {
     useUnifiedTopology: true,

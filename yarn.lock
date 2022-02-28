@@ -199,12 +199,12 @@ astral-regex@^2.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
-axios@^0.21.1:
-  version "0.21.4"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
-  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
+axios@^0.26.0:
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.0.tgz#9a318f1c69ec108f8cd5f3c3d390366635e13928"
+  integrity sha512-lKoGLMYtHvFrPVt3r+RBMp9nh34N0M8zEfCWqdWZx6phynIEhQqAdydpyBAAG211zlhX9Rgu08cOamy6XjE5Og==
   dependencies:
-    follow-redirects "^1.14.0"
+    follow-redirects "^1.14.8"
 
 balanced-match@^1.0.0:
   version "1.0.2"
@@ -539,33 +539,33 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-droff-helpers@^0.3.0:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.3.2.tgz#d37fe40cbb06dade7570f27738d8ddccf327dc25"
-  integrity sha512-jEvmfELeD/18Fie4Oy1oD7YoOpGuOPW0erP+oWp5ugUcL0dJWHbdG0lyxQzbjJVn/ANA/c4W7oPsdBrUZhg0Qg==
+droff-helpers@^0.4.0-alpha.0:
+  version "0.4.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.4.0-alpha.0.tgz#fb1e8d9fe0926912b5c78eb39953bd96a3da06a3"
+  integrity sha512-Txyp1z7xHk93CeIKZ0oeGB19sGVEkcD8lhXlHSegDIMKwGLEWzJif4Y2685MNS0NdMgDQea1ZC48BnBEsPSBaw==
   dependencies:
-    droff "^0.18.2"
+    droff "^0.20.0-alpha.0"
     fp-ts "^2.10.5"
     immutable "*"
     rxjs "^7.1.0"
 
-droff-interactions@^0.4.0:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.4.3.tgz#9e48c660d1052ef5f13d00f1f19e71ebf86ed333"
-  integrity sha512-2lbaA9Id2Dc+s1X2nRuOcymRiXEixTYQzl8yswpygUpWZamAJIYUR3PLuYbs3GRQlpXVlDhi51dMOn+HEMMxKw==
+droff-interactions@^0.6.0-alpha.0:
+  version "0.6.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.6.0-alpha.0.tgz#6fe81e3f061d0f16acb413caf7b9b58a6933e91f"
+  integrity sha512-ILmzu2cM1fyiIkgJMN+DNQnN9amxFqGH/LWMzYfpWOL+jUaGc3xsIh1VBA1iaLw3bpbmoRSs/z9zK4Pd2o84pw==
   dependencies:
-    droff "^0.18.2"
+    droff "^0.20.0-alpha.0"
     fp-ts "^2.10.5"
     immutable "^4.0.0-rc.12"
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
-droff@^0.18.0, droff@^0.18.2:
-  version "0.18.2"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.18.2.tgz#34a4a33b8643a684fcdf4da8d6ac863aedb1ffe3"
-  integrity sha512-d+bM74g1NsjweAnz/c77MPd0JvlTiMmzfk9I/VGQW6niAoDwB9wJ/Ce26onDeLHFA0edZkvoB/4MwrCNAxYH8A==
+droff@^0.20.0-alpha.0:
+  version "0.20.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.20.0-alpha.0.tgz#6e1426a817af942cc48e526099f70301631da067"
+  integrity sha512-5shxhexbu5bJN6fvg5wTblFV+uj/H0EgAVbjUnTr8+f6aOMcfJJhLx/otDTEKfyDlydLWdVvuOXmUzTH0DI5SQ==
   dependencies:
-    axios "^0.21.1"
+    axios "^0.26.0"
     fp-ts "^2.10.5"
     husky "^7.0.0"
     immutable "^4.0.0"
@@ -650,10 +650,10 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-follow-redirects@^1.14.0:
-  version "1.14.8"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
-  integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
+follow-redirects@^1.14.8:
+  version "1.14.9"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.9.tgz#dd4ea157de7bfaf9ea9b3fbd85aa16951f78d8d7"
+  integrity sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w==
 
 fp-ts@^2.10.5:
   version "2.11.8"
@@ -975,9 +975,9 @@ lines-and-columns@^1.1.6:
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
 lint-staged@>=10:
-  version "12.3.3"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.3.3.tgz#0a465962fe53baa2b4b9da50801ead49a910e03b"
-  integrity sha512-OqcLsqcPOqzvsfkxjeBpZylgJ3SRG1RYqc9LxC6tkt6tNsq1bNVkAixBwX09f6CobcHswzqVOCBpFR1Fck0+ag==
+  version "12.3.4"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.3.4.tgz#4b1ff8c394c3e6da436aaec5afd4db18b5dac360"
+  integrity sha512-yv/iK4WwZ7/v0GtVkNb3R82pdL9M+ScpIbJLJNyCXkJ1FGaXvRCOg/SeL59SZtPpqZhE7BD6kPKFLIDUhDx2/w==
   dependencies:
     cli-truncate "^3.1.0"
     colorette "^2.0.16"
@@ -1544,9 +1544,9 @@ string-width@^4.0.0, string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2
     strip-ansi "^6.0.1"
 
 string-width@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-5.1.0.tgz#5ab00980cfb29f43e736b113a120a73a0fb569d3"
-  integrity sha512-7x54QnN21P+XL/v8SuNKvfgsUre6PXpN7mc77N3HlZv+f1SBRGmjxtOud2Z6FZ8DmdkD/IdjCaf9XXbnqmTZGQ==
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-5.1.1.tgz#8825ca5f6b8dd5566a674e4f85001475a4b9c46e"
+  integrity sha512-V4jFFhDoJzUOpG491nUrDginBuZi+wKtG+omlT5hgdBLYGPNNVT/o75JWwsSqClbrYMEV9Dvm3fXjZzxyOjk2w==
   dependencies:
     eastasianwidth "^0.2.0"
     emoji-regex "^9.2.2"
