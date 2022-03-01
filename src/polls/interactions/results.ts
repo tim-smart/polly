@@ -23,7 +23,7 @@ export const handle =
 
       ctx.client.withCaches({
         guild: ctx.guildsCache.get,
-        roles: ctx.rolesCache.getForGuild,
+        roles: ctx.rolesCache.getForParent,
       })(({ interaction }) => interaction.guild_id),
       ctx.client.onlyWithCacheResults(),
 

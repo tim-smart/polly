@@ -17,7 +17,7 @@ export interface RunOpts {
   poll: Poll;
   interaction: Interaction;
   guild: Guild;
-  roles: Map<string, Role>;
+  roles: ReadonlyMap<string, Role>;
 }
 
 export const run = ({ poll, interaction: { member }, guild, roles }: RunOpts) =>
@@ -35,7 +35,7 @@ export const run = ({ poll, interaction: { member }, guild, roles }: RunOpts) =>
 const hasAdmin = Permissions.has(PermissionFlag.ADMINISTRATOR);
 
 const hasPermission =
-  (poll: Poll, guild: Guild, roles: Map<string, Role>) =>
+  (poll: Poll, guild: Guild, roles: ReadonlyMap<string, Role>) =>
   (member: GuildMember) => {
     const userID = member!.user!.id;
     if (poll.ownerID === userID) return true;

@@ -3,7 +3,7 @@ import { Client } from "droff";
 import { InteractionsHelper } from "droff-interactions";
 import {
   ReadOnlyCacheStore,
-  ReadOnlyNonGuildCacheStore,
+  ReadOnlyNonParentCacheStore,
 } from "droff/dist/caches/stores";
 import { Guild, Role } from "droff/dist/types";
 import { Collection, Db } from "mongodb";
@@ -12,7 +12,7 @@ import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
 
 export interface CacheContext {
-  guildsCache: ReadOnlyNonGuildCacheStore<Guild>;
+  guildsCache: ReadOnlyNonParentCacheStore<Guild>;
   rolesCache: ReadOnlyCacheStore<Role>;
 }
 
