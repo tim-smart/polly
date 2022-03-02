@@ -2,7 +2,6 @@ import { UI } from "droff-helpers";
 import {
   ApplicationCommandOption,
   ApplicationCommandOptionType,
-  ApplicationCommandType,
   ButtonStyle,
   Embed,
   EmbedField,
