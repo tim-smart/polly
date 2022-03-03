@@ -2,8 +2,8 @@ import * as Topgg from "@top-gg/sdk";
 import { Client } from "droff";
 import { InteractionsHelper } from "droff-interactions";
 import {
-  ReadOnlyCacheStore,
-  ReadOnlyNonParentCacheStore,
+  CacheStoreWithHelpers,
+  NonParentCacheStoreWithHelpers,
 } from "droff/dist/caches/stores";
 import { Guild, Role } from "droff/dist/types";
 import { Collection, Db } from "mongodb";
@@ -12,8 +12,8 @@ import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
 
 export interface CacheContext {
-  guildsCache: ReadOnlyNonParentCacheStore<Guild>;
-  rolesCache: ReadOnlyCacheStore<Role>;
+  guildsCache: NonParentCacheStoreWithHelpers<Guild>;
+  rolesCache: CacheStoreWithHelpers<Role>;
 }
 
 export const createCacheContext = (

@@ -1,6 +1,5 @@
 import { GlobalCommand } from "droff-interactions";
 import { ApplicationCommandOptionType } from "droff/dist/types";
-import * as R from "fp-ts/Reader";
 import { toOrdinal, toWords } from "number-to-words";
 import * as Rx from "rxjs";
 import {
