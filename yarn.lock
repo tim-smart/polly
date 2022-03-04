@@ -521,31 +521,31 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-droff-helpers@^0.5.0-alpha.4:
-  version "0.5.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.5.0-alpha.4.tgz#77faceaf78d522375820568af68ee149f8a6dd87"
-  integrity sha512-QbRL/XxJKQ+jWcEnXvITVycJK1KfVCTHfyCtcE4iuDTCHaF9dYOdUbRNmaMBWBR/+aV5a5tlUzPF4oCraTQnIA==
+droff-helpers@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.5.4.tgz#a8dc76baaea808f0710bb7a0821bcfa2ad8e0cb3"
+  integrity sha512-jR2NWVQO4qHyVl2ZGqFQO8NGjOIWA+Ld3boJsgikb5DjFNllxhLn9v2Zke9J/6sUwDqsPP7v7WfjADYvoimwxg==
   dependencies:
-    droff "^0.21.0-alpha.4"
+    droff "^0.22.1"
     fp-ts "^2.10.5"
     immutable "*"
     rxjs "^7.1.0"
 
-droff-interactions@^0.7.0-alpha.4:
-  version "0.7.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.7.0-alpha.4.tgz#d66dc5306f6dab32e39815b2ee4b7a7f4c01c50f"
-  integrity sha512-4eI72JTygsTb8v65bDuhYHav89gs9B5AKzO+dwP/3paSay0xTXdYhMK39BwFTD91f6zBEP9pEWCLBLI13Si3qw==
+droff-interactions@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.7.4.tgz#19466296c02ecb302a80022943d3c4d93e032e89"
+  integrity sha512-fQetQp0L+ujFFSdqqkAQ3Lc7VLNMhDKw1sf8V+6QhASweXnR8QLyWJShajypaicNxwvbwGeQSFcHIVmPsdsWrw==
   dependencies:
-    droff "^0.21.0-alpha.4"
+    droff "^0.22.1"
     fp-ts "^2.10.5"
     immutable "^4.0.0-rc.12"
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
-droff@^0.21.0-alpha.4:
-  version "0.21.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.21.0-alpha.4.tgz#a1593d26a306660d001a6b79db8356a6dca75d31"
-  integrity sha512-8z/peKZy1zVW3XUqGIuRQfQMrJbV4S9m6uDGVYHMkxD0gpT6vJlQItQMdl92rMQV28TniX/zzytKQEC7IBACaw==
+droff@^0.22.1:
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.22.1.tgz#d330000ec86a898264b0fe6201cd33bfb3601ef0"
+  integrity sha512-e7bayinpJpTjDTNE3FzQkG/h4M1693pFCEUv2QipKvIPs5H4sDn9DGrb+lApDV204LK3QGHSJvv23bg91NAkaw==
   dependencies:
     axios "^0.26.0"
     fp-ts "^2.10.5"
