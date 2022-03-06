@@ -40,8 +40,8 @@ export const createDbContext = (db: Db): DbContext => ({
   votesCollection: db.collection("votes"),
 });
 
-export interface CommandContext {
-  commands: InteractionsHelper;
+export interface InteractionsContext {
+  ix: InteractionsHelper;
 }
 
 export interface ClientContext {

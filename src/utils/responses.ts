@@ -2,6 +2,7 @@ import { InteractionContext } from "droff-interactions";
 import {
   InteractionCallbackDatum,
   InteractionCallbackMessage,
+  InteractionCallbackType,
   MessageFlag,
 } from "droff/dist/types";
 import * as F from "fp-ts/function";
@@ -22,7 +23,7 @@ export const respond =
         (content) =>
           TE.tryCatch(
             () =>
-              ctx.respond({
+              ctx.respond(InteractionCallbackType.CHANNEL_MESSAGE_WITH_SOURCE)({
                 content,
                 flags: MessageFlag.EPHEMERAL,
               }) as Promise<unknown>,
@@ -36,8 +37,15 @@ export const respond =
       ),
     );
 
-export const update = respond(({ update }, msg) => update(msg));
-export const message = respond(({ respond }, msg) => respond({ ...msg }));
+export const update = respond(({ respond }, msg) =>
+  respond(InteractionCallbackType.UPDATE_MESSAGE)(msg),
+);
+export const message = respond(({ respond }, msg) =>
+  respond(InteractionCallbackType.CHANNEL_MESSAGE_WITH_SOURCE)({ ...msg }),
+);
 export const ephemeral = respond(({ respond }, msg) =>
-  respond({ ...msg, flags: MessageFlag.EPHEMERAL }),
+  respond(InteractionCallbackType.CHANNEL_MESSAGE_WITH_SOURCE)({
+    ...msg,
+    flags: MessageFlag.EPHEMERAL,
+  }),
 );

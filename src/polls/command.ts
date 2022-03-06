@@ -1,11 +1,14 @@
-import { GlobalCommand } from "droff-interactions";
-import { ApplicationCommandOptionType } from "droff/dist/types";
+import * as Ix from "droff-interactions";
+import {
+  ApplicationCommandOptionType,
+  InteractionType,
+} from "droff/dist/types";
 import { toOrdinal, toWords } from "number-to-words";
 import * as Rx from "rxjs";
 import {
   CacheContext,
   ClientContext,
-  CommandContext,
+  InteractionsContext,
   DbContext,
 } from "../utils/contexts";
 import * as Create from "./interactions/create";
@@ -13,7 +16,7 @@ import * as Results from "./interactions/results";
 import * as Vote from "./interactions/vote";
 import { yesNoField } from "./ui";
 
-const command: GlobalCommand = {
+const command: Ix.GlobalCommand = {
   name: "poll",
   description: "Creates a new poll",
   options: [
@@ -45,20 +48,24 @@ const command: GlobalCommand = {
 };
 
 export const register = (
-  ctx: DbContext & CommandContext & ClientContext & CacheContext,
+  ctx: DbContext & InteractionsContext & ClientContext & CacheContext,
 ) => {
-  const { commands } = ctx;
+  const { ix } = ctx;
 
   return Rx.merge(
     // Poll creation command
-    commands
+    ix
       .global(command, process.env.CREATE_GLOBAL_COMMANDS === "true")
       .pipe(Create.handle(ctx)),
 
     // Handle votes
-    commands.component(/^vote_/).pipe(Vote.handle(ctx)),
+    ix
+      .interaction(InteractionType.MESSAGE_COMPONENT)
+      .pipe(Ix.filterByCustomId(/^vote_/), Vote.handle(ctx)),
 
     // Handle results
-    commands.component(/^results_/).pipe(Results.handle(ctx)),
+    ix
+      .interaction(InteractionType.MESSAGE_COMPONENT)
+      .pipe(Ix.filterByCustomId(/^results_/), Results.handle(ctx)),
   );
 };

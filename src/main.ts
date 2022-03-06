@@ -21,13 +21,13 @@ async function main() {
   const [cacheCtx, cacheEffects$] = createCacheContext(client);
 
   // Create interactions helper
-  const commands = Interactions.create(client);
+  const ix = Interactions.create(client);
 
   const ctx = {
     ...createDbContext(db),
     ...cacheCtx,
     client,
-    commands,
+    ix,
     topgg,
   };
 
