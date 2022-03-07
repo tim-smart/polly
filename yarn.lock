@@ -522,30 +522,30 @@ dotenv@^10.0.0:
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
 droff-helpers@^0.5.8:
-  version "0.5.8"
-  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.5.8.tgz#59e8821ce13b41e1bd40cc09a69cd0868d4603c9"
-  integrity sha512-e2a+CWjIi4e7vrsjMiAe62pPDIRRdiB54kXKt2jWvYsEc5LSS9lJUTbrTEaXCi9QgJzDGtkHEze00ubQP5p5Xg==
+  version "0.5.15"
+  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.5.15.tgz#d23780c703060b83bae7c0966a4f1b60c5673a10"
+  integrity sha512-+65RIJFOZIwgTv4fzBOGN3s/NUl1sgZOPx9jyMKRwcUlk5hB9tzNy4DLSAeT9mkZjzSi3kuwJS/TDczyfC2oUw==
   dependencies:
-    droff "^0.24.1"
+    droff "^0.27.4"
     fp-ts "^2.10.5"
     immutable "^4.0.0"
     rxjs "^7.1.0"
 
 droff-interactions@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.8.0.tgz#ffb93061dd1df118b014ee7864204c9c212e6736"
-  integrity sha512-ISuQGEaX/xlwiDLszsLNdbd7WiJTpEJ5g4oeZ9OLbP3x/4AmAk7/BRJ6vWUM5hKd9HDkOe0dk17Z46uALHPn8w==
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.8.7.tgz#52759925e1e3a89b71063b42053f41d6bcb4418e"
+  integrity sha512-1nSX4cpUftwN8nyJpdTuaaMxOU8vcXP21ILOurwBl2JIkrT1mIfVtbii4n97mvz/xLKhwkvQVPgQKZA/PVdiew==
   dependencies:
-    droff "^0.24.1"
+    droff "^0.27.4"
     fp-ts "^2.10.5"
     immutable "^4.0.0"
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
-droff@^0.24.1:
-  version "0.24.1"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.24.1.tgz#4f8cdbc703d1272272bffa6657bb17e563101b0d"
-  integrity sha512-V5UubRhuYTBRgaXG9IvT4k929R+P+yA3MYU9z8Io7BZFOJYXs/UjA94SWISyizcRSLQFKuB+DnBx2s9E+Dyexg==
+droff@^0.27.3, droff@^0.27.4:
+  version "0.27.4"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.27.4.tgz#836df2fb2c6b0946333918c074e89fc78b2f11c4"
+  integrity sha512-3IibC6wxq05QauIbPxrqgGf5EWEAuE2dXsRsflT/TMqwlf+6yOTsgcVQqJHrJS+XVNJNOyAwjfCxspN8HnSAKw==
   dependencies:
     axios "^0.26.0"
     fp-ts "^2.10.5"
