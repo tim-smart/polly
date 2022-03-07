@@ -23,7 +23,7 @@
     "dotenv": "^10.0.0",
     "droff": "^0.27.3",
     "droff-helpers": "^0.5.8",
-    "droff-interactions": "^0.8.0",
+    "droff-interactions": "^0.9.0",
     "fp-ts": "^2.10.5",
     "immutable": "^4.0.0",
     "mongodb": "^3.6.9",

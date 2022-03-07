@@ -61,11 +61,11 @@ export const register = (
     // Handle votes
     ix
       .interaction(InteractionType.MESSAGE_COMPONENT)
-      .pipe(Ix.filterByCustomId(/^vote_/), Vote.handle(ctx)),
+      .pipe(Ix.customIdStartsWith("vote_"), Vote.handle(ctx)),
 
     // Handle results
     ix
       .interaction(InteractionType.MESSAGE_COMPONENT)
-      .pipe(Ix.filterByCustomId(/^results_/), Results.handle(ctx)),
+      .pipe(Ix.customIdStartsWith("results_"), Results.handle(ctx)),
   );
 };

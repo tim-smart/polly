@@ -531,10 +531,10 @@ droff-helpers@^0.5.8:
     immutable "^4.0.0"
     rxjs "^7.1.0"
 
-droff-interactions@^0.8.0:
-  version "0.8.7"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.8.7.tgz#52759925e1e3a89b71063b42053f41d6bcb4418e"
-  integrity sha512-1nSX4cpUftwN8nyJpdTuaaMxOU8vcXP21ILOurwBl2JIkrT1mIfVtbii4n97mvz/xLKhwkvQVPgQKZA/PVdiew==
+droff-interactions@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.9.0.tgz#f68826cb72cfa3b3c09da62f3669f0a9682aa085"
+  integrity sha512-3mimrdhBUigdxW8qxjjluEMzXhpbVVRuvmbKaEWZzbXsuJrrV3wJVyK3TTOIMY9zn/xfK+DYe2GloFcaD8XOug==
   dependencies:
     droff "^0.27.4"
     fp-ts "^2.10.5"
