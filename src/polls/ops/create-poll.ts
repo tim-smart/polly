@@ -3,7 +3,7 @@ import { InteractionContext } from "droff-interactions";
 import {
   ApplicationCommandInteractionDataOption,
   Snowflake,
-} from "droff/dist/types";
+} from "droff/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import * as RTE from "fp-ts/ReaderTaskEither";

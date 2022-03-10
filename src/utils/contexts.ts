@@ -6,8 +6,8 @@ import {
   CacheStoreHelpers,
   NonParentCacheStore,
   NonParentCacheStoreHelpers,
-} from "droff/dist/caches/stores";
-import { Guild, Role } from "droff/dist/types";
+} from "droff/caches/stores";
+import { Guild, Role } from "droff/types";
 import { Collection, Db } from "mongodb";
 import * as Rx from "rxjs";
 import { Poll } from "../models/Poll";

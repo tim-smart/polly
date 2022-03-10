@@ -1,5 +1,5 @@
 import { UI as Components } from "droff-helpers";
-import { InteractionCallbackMessage, Snowflake } from "droff/dist/types";
+import { InteractionCallbackMessage, Snowflake } from "droff/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import * as RTE from "fp-ts/ReaderTaskEither";

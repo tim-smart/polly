@@ -521,31 +521,31 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-droff-helpers@^0.5.8:
-  version "0.5.15"
-  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.5.15.tgz#d23780c703060b83bae7c0966a4f1b60c5673a10"
-  integrity sha512-+65RIJFOZIwgTv4fzBOGN3s/NUl1sgZOPx9jyMKRwcUlk5hB9tzNy4DLSAeT9mkZjzSi3kuwJS/TDczyfC2oUw==
+droff-helpers@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.8.0.tgz#e6af168cd80f3477aeb46301729bf3d57ea37bc6"
+  integrity sha512-AIbKFKKHJXJsWPvBIMetSyA5QuEI18CkHsGdL8F1IOT8ihTWcR3Qs4eym8St7dtBM5KdrGY7jEglVCdhsOj+Vw==
   dependencies:
-    droff "^0.27.4"
+    droff "^0.29.0"
     fp-ts "^2.10.5"
     immutable "^4.0.0"
     rxjs "^7.1.0"
 
-droff-interactions@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.9.0.tgz#f68826cb72cfa3b3c09da62f3669f0a9682aa085"
-  integrity sha512-3mimrdhBUigdxW8qxjjluEMzXhpbVVRuvmbKaEWZzbXsuJrrV3wJVyK3TTOIMY9zn/xfK+DYe2GloFcaD8XOug==
+droff-interactions@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.10.0.tgz#8133819e9db5c5e3731bb00bd31124a5372528f5"
+  integrity sha512-a+9h6iRKUVQF3Vr4858QMo8mgUzi+fsUhazBQ9DFfTq4b1cvyBI/F8l6aXe756Cv9yvLUCkSiSdbdOHffTDKxg==
   dependencies:
-    droff "^0.27.4"
+    droff "^0.29.0"
     fp-ts "^2.10.5"
     immutable "^4.0.0"
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
-droff@^0.27.3, droff@^0.27.4:
-  version "0.27.4"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.27.4.tgz#836df2fb2c6b0946333918c074e89fc78b2f11c4"
-  integrity sha512-3IibC6wxq05QauIbPxrqgGf5EWEAuE2dXsRsflT/TMqwlf+6yOTsgcVQqJHrJS+XVNJNOyAwjfCxspN8HnSAKw==
+droff@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.29.0.tgz#5f95138c8796dc56fccce8ca4273479ba5ebb9ea"
+  integrity sha512-EADGeIlhgK9MAbmZkY5LYeVRdU1sjQKS9fcxoUdxi3OQC5iMPgpM5eU3XjYtnoVvBGjwqQFk+UwHY4wAeH4l4w==
   dependencies:
     axios "^0.26.0"
     fp-ts "^2.10.5"

@@ -1,10 +1,9 @@
 import { InteractionContext } from "droff-interactions";
 import {
-  InteractionCallbackDatum,
   InteractionCallbackMessage,
   InteractionCallbackType,
   MessageFlag,
-} from "droff/dist/types";
+} from "droff/types";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
 

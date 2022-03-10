@@ -1,15 +1,12 @@
 import * as Ix from "droff-interactions";
-import {
-  ApplicationCommandOptionType,
-  InteractionType,
-} from "droff/dist/types";
+import { ApplicationCommandOptionType, InteractionType } from "droff/types";
 import { toOrdinal, toWords } from "number-to-words";
 import * as Rx from "rxjs";
 import {
   CacheContext,
   ClientContext,
-  InteractionsContext,
   DbContext,
+  InteractionsContext,
 } from "../utils/contexts";
 import * as Create from "./interactions/create";
 import * as Results from "./interactions/results";

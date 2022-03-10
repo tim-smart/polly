@@ -6,10 +6,10 @@ import {
   Embed,
   EmbedField,
   Snowflake,
-} from "droff/dist/types";
+} from "droff/types";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import * as Im from "immutable";
+import Im from "immutable";
 import * as R from "remeda";
 import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";

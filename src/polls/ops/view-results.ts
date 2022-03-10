@@ -5,7 +5,7 @@ import {
   Interaction,
   PermissionFlag,
   Role,
-} from "droff/dist/types";
+} from "droff/types";
 import * as F from "fp-ts/function";
 import * as RTE from "fp-ts/ReaderTaskEither";
 import { Poll } from "../../models/Poll";

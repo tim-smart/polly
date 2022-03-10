@@ -1,4 +1,4 @@
-import { Snowflake } from "droff/dist/types";
+import { Snowflake } from "droff/types";
 import * as Arr from "fp-ts/Array";
 import * as F from "fp-ts/function";
 import * as O from "fp-ts/Option";

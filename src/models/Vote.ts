@@ -1,4 +1,4 @@
-import { Snowflake } from "droff/dist/types";
+import { Snowflake } from "droff/types";
 import { ObjectId } from "mongodb";
 
 export interface Vote {

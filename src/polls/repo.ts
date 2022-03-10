@@ -1,4 +1,4 @@
-import { Snowflake } from "droff/dist/types";
+import { Snowflake } from "droff/types";
 import * as F from "fp-ts/function";
 import * as RTE from "fp-ts/ReaderTaskEither";
 import { ObjectId } from "mongodb";
