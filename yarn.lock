@@ -190,9 +190,9 @@ astral-regex@^2.0.0:
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
 axios@^0.26.0:
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.0.tgz#9a318f1c69ec108f8cd5f3c3d390366635e13928"
-  integrity sha512-lKoGLMYtHvFrPVt3r+RBMp9nh34N0M8zEfCWqdWZx6phynIEhQqAdydpyBAAG211zlhX9Rgu08cOamy6XjE5Og==
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.1.tgz#1ede41c51fcf51bbbd6fd43669caaa4f0495aaa9"
+  integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
   dependencies:
     follow-redirects "^1.14.8"
 
@@ -522,30 +522,30 @@ dotenv@^10.0.0:
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
 droff-helpers@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.8.0.tgz#e6af168cd80f3477aeb46301729bf3d57ea37bc6"
-  integrity sha512-AIbKFKKHJXJsWPvBIMetSyA5QuEI18CkHsGdL8F1IOT8ihTWcR3Qs4eym8St7dtBM5KdrGY7jEglVCdhsOj+Vw==
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.8.1.tgz#499c45fff02d1bfcf751cabd4b36fca7a0cb481b"
+  integrity sha512-gK1D5a00LuWuoBq8tIFpCg3OaESXs70uM9ojw0SV8q0Pk+Wa35TxxvOqKrF4ssEZRQZwgv+JPUNq4omsDsM57A==
   dependencies:
-    droff "^0.29.0"
+    droff "^0.29.1"
     fp-ts "^2.10.5"
     immutable "^4.0.0"
     rxjs "^7.1.0"
 
 droff-interactions@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.10.0.tgz#8133819e9db5c5e3731bb00bd31124a5372528f5"
-  integrity sha512-a+9h6iRKUVQF3Vr4858QMo8mgUzi+fsUhazBQ9DFfTq4b1cvyBI/F8l6aXe756Cv9yvLUCkSiSdbdOHffTDKxg==
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.10.1.tgz#2363e694053b0c6747027fac8a28dce1c9432f0e"
+  integrity sha512-2QBsihmUEb5+UbAlgo3UgrV6IeVcKVodKuTvIsYb+E+lOELcMvNEaHPEZN1Hm833In3UC4RExGLo708PDe6vDA==
   dependencies:
-    droff "^0.29.0"
+    droff "^0.29.1"
     fp-ts "^2.10.5"
     immutable "^4.0.0"
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
-droff@^0.29.0:
-  version "0.29.0"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.29.0.tgz#5f95138c8796dc56fccce8ca4273479ba5ebb9ea"
-  integrity sha512-EADGeIlhgK9MAbmZkY5LYeVRdU1sjQKS9fcxoUdxi3OQC5iMPgpM5eU3XjYtnoVvBGjwqQFk+UwHY4wAeH4l4w==
+droff@^0.29.0, droff@^0.29.1:
+  version "0.29.1"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.29.1.tgz#1f6eb36952e773c4dc5d85c4e47e736450a69916"
+  integrity sha512-aNQUHcJL9R08pUa3RzF5IDWu7V36bR2UWoxN+wP+gRE2HuS4lKTMQrjc0mPNMJoQTswyoMze/Jpja7RfHKlHQw==
   dependencies:
     axios "^0.26.0"
     fp-ts "^2.10.5"
@@ -1341,9 +1341,9 @@ rxjs-iterable@^0.1.1:
   integrity sha512-dzKa1idllOkwhdxDMUEt2LxxCtvfe7TGXXx/9TF7doPJ+vKU6mMK7DKl9+G7PEUD9BISt8sxWhNYbVN9Pm4Gkg==
 
 rxjs@^7.1.0, rxjs@^7.5.1:
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.4.tgz#3d6bd407e6b7ce9a123e76b1e770dc5761aa368d"
-  integrity sha512-h5M3Hk78r6wAheJF0a5YahB1yRQKCsZ4MsGdZ5O9ETbVtjPcScGfrMmoOq7EBsCRzd4BDkvDJ7ogP8Sz5tTFiQ==
+  version "7.5.5"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.5.tgz#2ebad89af0f560f460ad5cc4213219e1f7dd4e9f"
+  integrity sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==
   dependencies:
     tslib "^2.1.0"
 
@@ -1643,9 +1643,9 @@ url-parse-lax@^3.0.0:
     prepend-http "^2.0.0"
 
 utf-8-validate@^5.0.8:
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/utf-8-validate/-/utf-8-validate-5.0.8.tgz#4a735a61661dbb1c59a0868c397d2fe263f14e58"
-  integrity sha512-k4dW/Qja1BYDl2qD4tOMB9PFVha/UJtxTc1cXYOe3WwA/2m0Yn4qB7wLMpJyLJ/7DR0XnTut3HsCSzDT4ZvKgA==
+  version "5.0.9"
+  resolved "https://registry.yarnpkg.com/utf-8-validate/-/utf-8-validate-5.0.9.tgz#ba16a822fbeedff1a58918f2a6a6b36387493ea3"
+  integrity sha512-Yek7dAy0v3Kl0orwMlvi7TPtiCNrdfHNd7Gcc/pLq4BLXqfAmd0J7OWMizUQnTTJsyjKn02mU7anqwfmUP4J8Q==
   dependencies:
     node-gyp-build "^4.3.0"
 
