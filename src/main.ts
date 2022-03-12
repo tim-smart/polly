@@ -5,7 +5,8 @@ import { createClient } from "droff";
 import * as Interactions from "droff-interactions";
 import { MongoClient } from "mongodb";
 import * as Rx from "rxjs";
-import * as Poll from "./polls/command";
+import * as Polls from "./polls/command";
+import * as General from "./general";
 import * as Topgg from "./topgg";
 import { createCacheContext, createDbContext } from "./utils/contexts";
 
@@ -40,7 +41,8 @@ async function main() {
     Topgg.postStats(ctx),
 
     // Register commands
-    Poll.register(ctx),
+    General.register(ctx),
+    Polls.register(ctx),
   ).subscribe();
 }
 
