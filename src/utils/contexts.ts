@@ -44,6 +44,7 @@ export const createDbContext = (db: Db): DbContext => ({
 
 export interface InteractionsContext {
   ix: InteractionsHelper;
+  createCommands: boolean;
 }
 
 export interface ClientContext {

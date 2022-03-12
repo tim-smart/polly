@@ -29,6 +29,7 @@ async function main() {
     ...cacheCtx,
     client,
     ix,
+    createCommands: process.env.CREATE_GLOBAL_COMMANDS === "true",
     topgg,
   };
 

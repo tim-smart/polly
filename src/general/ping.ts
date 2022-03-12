@@ -5,6 +5,7 @@ import { ClientContext, InteractionsContext } from "../utils/contexts";
 export const register = ({
   client,
   ix,
+  createCommands,
 }: ClientContext & InteractionsContext) => {
   const latency$ = client.gateway.shards$.pipe(
     RxO.mergeMap((s) => s.latency$),
@@ -18,7 +19,7 @@ export const register = ({
         name: "ping",
         description: "Get latency information",
       },
-      true,
+      createCommands,
     )
     .pipe(
       RxO.withLatestFrom(latency$),
