@@ -1,7 +1,7 @@
 import { Snowflake } from "droff/types";
 import * as F from "fp-ts/function";
 import * as RTE from "fp-ts/ReaderTaskEither";
-import { ObjectId } from "mongodb";
+import { ObjectId, WithId } from "mongodb";
 import { Poll } from "../models/Poll";
 import { Vote } from "../models/Vote";
 import { DbContext } from "../utils/contexts";
@@ -13,7 +13,12 @@ export const insert = (poll: Poll) =>
       ({ pollsCollection }: DbContext) => pollsCollection.insertOne(poll),
       () => "Could not insert poll",
     ),
-    RTE.map((r) => r.ops[0]),
+    RTE.map(
+      (r): WithId<Poll> => ({
+        ...poll,
+        _id: r.insertedId,
+      }),
+    ),
   );
 
 export const get = (pollId: ObjectId) =>
@@ -24,7 +29,7 @@ export const get = (pollId: ObjectId) =>
       (err) => `Could not get poll: ${err}`,
     ),
     RTE.filterOrElse(
-      (poll): poll is Poll => poll != null,
+      (poll): poll is WithId<Poll> => poll != null,
       () => "Poll not found",
     ),
   );
@@ -42,7 +47,12 @@ export const insertVote = (vote: Vote, multiple: boolean) =>
       () => "Could not insert vote",
     ),
 
-    RTE.map((result) => result.ops[0]),
+    RTE.map(
+      (result): WithId<Vote> => ({
+        ...vote,
+        _id: result.insertedId,
+      }),
+    ),
   );
 
 const removePreviousVotes = (pollID: ObjectId, userID: Snowflake) =>

@@ -1,6 +1,8 @@
 import { InteractionContext } from "droff-interactions";
+import { Interactions } from "droff-helpers";
 import { InteractionCallbackMessage } from "droff/types";
 import * as E from "fp-ts/Either";
+import * as O from "fp-ts/Option";
 import * as F from "fp-ts/function";
 import * as R from "fp-ts/Reader";
 import * as RTE from "fp-ts/ReaderTaskEither";
@@ -48,7 +50,8 @@ export const handle =
 
 const fetchPoll = (ctx: InteractionContext) =>
   F.pipe(
-    Helpers.resultsIdDetails(ctx.interaction.data!.custom_id || ""),
+    Interactions.getComponentData(ctx.interaction),
+    O.chain(({ custom_id }) => Helpers.resultsIdDetails(custom_id)),
     RTE.fromOption(() => "Could not extract poll information from custom_id"),
     RTE.chain(({ pollID }) => Repo.get(pollID)),
   );

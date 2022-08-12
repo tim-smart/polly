@@ -14,9 +14,7 @@ async function main() {
   const client = createClient({
     token: process.env.DISCORD_BOT_TOKEN!,
   });
-  const mongo = await MongoClient.connect(process.env.MONGODB_URI!, {
-    useUnifiedTopology: true,
-  });
+  const mongo = await MongoClient.connect(process.env.MONGODB_URI!);
   const db = mongo.db(process.env.MONGODB_DB!);
   const topgg = new Api(process.env.TOPGG_TOKEN!);
   const [cacheCtx, cacheEffects$] = createCacheContext(client);

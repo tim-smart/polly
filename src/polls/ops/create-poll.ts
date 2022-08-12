@@ -18,35 +18,34 @@ export const fromContext = (ctx: InteractionContext) =>
   );
 
 const pollFromData = (ctx: InteractionContext) =>
-  F.pipe(
-    O.fromNullable(ctx.interaction.data),
-    O.map(({ options }) =>
-      pollFromOptions(
-        ctx.interaction.id,
-        (ctx.member?.user || ctx.user!).id,
-        options!,
-      ),
-    ),
+  pollFromOptions(
+    ctx.interaction.id,
+    (ctx.member?.user || ctx.user!).id,
+    Interactions.options(ctx.interaction),
   );
 
 const pollFromOptions = (
   interactionID: Snowflake,
   ownerID: Snowflake,
   options: ApplicationCommandInteractionDataOption[],
-): Poll =>
-  F.pipe(Interactions.transformOptions(options), (map) => {
-    const choices = options
+): O.Option<Poll> =>
+  F.pipe(
+    options
       .filter(({ name }) => name.startsWith("choice-"))
-      .map(({ value }): Choice => ({ name: value! }));
+      .map(({ value }): Choice => ({ name: value! })),
+    O.fromPredicate((choices) => choices.length >= 2),
+    O.map((choices) => {
+      const poll = Interactions.transformOptions(options)
+        .filter((_, key) => !key.startsWith("choice-"))
+        .toJSON();
 
-    const poll = map.filter((_, key) => !key.startsWith("choice-")).toJSON();
-
-    return {
-      ...poll,
-      interactionID,
-      ownerID,
-      multiple: poll.multiple === "true",
-      anonymous: poll.anonymous === "true",
-      choices,
-    } as Poll;
-  });
+      return {
+        ...poll,
+        interactionID,
+        ownerID,
+        multiple: poll.multiple === "true",
+        anonymous: poll.anonymous === "true",
+        choices,
+      } as Poll;
+    }),
+  );

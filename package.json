@@ -7,7 +7,7 @@
     "build": "rm -rf dist/ && tsc"
   },
   "devDependencies": {
-    "@types/mongodb": "^3.6.17",
+    "@types/mongodb": "^4.0.7",
     "@types/node": "^15.6.1",
     "@types/number-to-words": "^1.2.1",
     "husky": "^6.0.0",
@@ -20,13 +20,13 @@
   "dependencies": {
     "@top-gg/sdk": "^3.1.1",
     "bufferutil": "^4.0.3",
-    "dotenv": "^10.0.0",
-    "droff": "^0.32.0",
-    "droff-helpers": "^0.8.0",
-    "droff-interactions": "^0.10.0",
+    "dotenv": "^16.0.1",
+    "droff": "^0.34.2",
+    "droff-helpers": "^0.9.2",
+    "droff-interactions": "^0.11.2",
     "fp-ts": "^2.10.5",
     "immutable": "^4.0.0",
-    "mongodb": "^3.6.9",
+    "mongodb": "^4.8.1",
     "number-to-words": "^1.2.4",
     "remeda": "^0.0.27"
   }

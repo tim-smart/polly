@@ -1,6 +1,8 @@
 import { InteractionContext } from "droff-interactions";
+import { Interactions } from "droff-helpers";
 import * as F from "fp-ts/function";
 import * as R from "fp-ts/Reader";
+import * as O from "fp-ts/Option";
 import * as RTE from "fp-ts/ReaderTaskEither";
 import * as Rx from "rxjs";
 import * as RxO from "rxjs/operators";
@@ -19,8 +21,11 @@ export const handle =
 
 const run = (ctx: InteractionContext) =>
   F.pipe(
+    Interactions.getComponentData(ctx.interaction),
+    RTE.fromOption(() => "Could not find custom_id"),
+
     // Fetch poll from interaction details
-    fetchPoll(ctx.interaction.data!.custom_id || ""),
+    RTE.chain(({ custom_id }) => fetchPoll(custom_id)),
 
     // Toggle the vote
     RTE.chainFirst(({ poll, choice }) =>
