@@ -51,7 +51,7 @@ export const register = (
 
   return Rx.merge(
     // Poll creation command
-    ix.global(command, ctx.createCommands).pipe(Create.handle(ctx)),
+    ix.global(command).pipe(Create.handle(ctx)),
 
     // Handle votes
     ix

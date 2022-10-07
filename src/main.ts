@@ -27,7 +27,6 @@ async function main() {
     ...cacheCtx,
     client,
     ix,
-    createCommands: process.env.CREATE_GLOBAL_COMMANDS === "true",
     topgg,
   };
 
@@ -35,6 +34,9 @@ async function main() {
     // Start client
     client.effects$,
     cacheEffects$,
+
+    // Sync slash commands
+    ix.sync$,
 
     // Send stats to top.gg
     Topgg.postStats(ctx),
