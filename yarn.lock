@@ -444,23 +444,6 @@ droff-interactions@^0.13.0:
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
-droff@^0.38.0:
-  version "0.38.1"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.38.1.tgz#bbe7b36e38179a808f52855aec568f828a59c2f2"
-  integrity sha512-BRGsGdhUdYX0tC+rrW5ygnCH6366KDXRs5JHuKT6I6/W5+wK5xLJd8lV83DqlYHCWvphMqmjirq0AddECPM0wA==
-  dependencies:
-    axios "^0.27.2"
-    fp-ts "^2.10.5"
-    immutable "^4.0.0"
-    queueing-subject "^1.0.0"
-    rxjs "^7.1.0"
-    rxjs-iterable "^0.2.0"
-    tslib "^2.3.0"
-    ws "^8.2.2"
-  optionalDependencies:
-    bufferutil "^4.0.3"
-    utf-8-validate "^5.0.8"
-
 droff@^0.39.0:
   version "0.39.0"
   resolved "https://registry.yarnpkg.com/droff/-/droff-0.39.0.tgz#f3d59409c3c73e69ad453edc8ac4bed5f20952d5"
