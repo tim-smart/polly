@@ -21,7 +21,7 @@
     "@top-gg/sdk": "^3.1.1",
     "bufferutil": "^4.0.3",
     "dotenv": "^16.0.1",
-    "droff": "^0.39.0",
+    "droff": "^0.39.1",
     "droff-helpers": "^0.10.2",
     "droff-interactions": "^0.13.0",
     "fp-ts": "^2.10.5",
