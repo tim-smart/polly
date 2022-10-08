@@ -422,32 +422,49 @@ dotenv@^16.0.1:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.3.tgz#115aec42bac5053db3c456db30cc243a5a836a07"
   integrity sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==
 
-droff-helpers@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.10.2.tgz#0fb8f49088b2010f56a2c781d3f9638b3cb39a13"
-  integrity sha512-M8EVq0XHGDp8hnB5mZE/qMe3+l5V2xpAoRkPdX6nbnAtxbBgJKAXIMVulfm4kHhUD5s0U4CnrfXulH1Xumqoag==
+droff-helpers@^0.10.2, droff-helpers@^0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/droff-helpers/-/droff-helpers-0.10.4.tgz#07dff8e77e15ac7d4b5e05eedc6b5b48b06c1d75"
+  integrity sha512-/rq8yNb4/ZC+fHjIItS+L5lscS7xnyYZJNdgHJMAtAJqB+n6bzs8Lf0Jp1acKIrFKUbQ6nYYppTiF/Z6tBUK+Q==
   dependencies:
-    droff "^0.38.0"
+    droff "^0.39.0"
     fp-ts "^2.10.5"
     immutable "^4.0.0"
     rxjs "^7.1.0"
 
 droff-interactions@^0.13.0:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.13.1.tgz#92073d1276a62bc4af12f9827cb0ec2ee1dbb866"
-  integrity sha512-oDTycI4E/F5uhtUGaydOS2BwFVpUSlvUbVOzKpt3eIy2x9z/Hx3INFbrsBBQUk1d5ylYLOjtm+bcg3T6a9NlOg==
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/droff-interactions/-/droff-interactions-0.13.3.tgz#9d70c0b299573c5fab910f976806aefcf76205c5"
+  integrity sha512-/nh0EiNmXhri5RVCy4v3Whjur69GlZuL531qvMyuJ6OTCwun+dGFp8lniD8ejeGG2LaRhUFBMIrp8ajADJwY4A==
   dependencies:
-    droff "^0.38.0"
-    droff-helpers "^0.10.2"
+    droff "^0.39.0"
+    droff-helpers "^0.10.4"
     fp-ts "^2.10.5"
     immutable "^4.0.0"
     rxjs "^7.1.0"
     tslib "^2.3.0"
 
 droff@^0.38.0:
-  version "0.38.0"
-  resolved "https://registry.yarnpkg.com/droff/-/droff-0.38.0.tgz#ea3f9a1352b65228e499411bca8e8abe220f653c"
-  integrity sha512-RVNXG811fsaXmfE5DeGD4dxa7jwkeoOmPBl0+A6kJRu8kZEKy/cFQn0xRmteqIfS+MNFxX+9xphZ38zMytvGxA==
+  version "0.38.1"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.38.1.tgz#bbe7b36e38179a808f52855aec568f828a59c2f2"
+  integrity sha512-BRGsGdhUdYX0tC+rrW5ygnCH6366KDXRs5JHuKT6I6/W5+wK5xLJd8lV83DqlYHCWvphMqmjirq0AddECPM0wA==
+  dependencies:
+    axios "^0.27.2"
+    fp-ts "^2.10.5"
+    immutable "^4.0.0"
+    queueing-subject "^1.0.0"
+    rxjs "^7.1.0"
+    rxjs-iterable "^0.2.0"
+    tslib "^2.3.0"
+    ws "^8.2.2"
+  optionalDependencies:
+    bufferutil "^4.0.3"
+    utf-8-validate "^5.0.8"
+
+droff@^0.39.0:
+  version "0.39.0"
+  resolved "https://registry.yarnpkg.com/droff/-/droff-0.39.0.tgz#f3d59409c3c73e69ad453edc8ac4bed5f20952d5"
+  integrity sha512-fKQMd5Y+C3t+NatoeMTwCnPxxuqwx2sn2q3OOwvk/8eFdRBGM5Rqp7OspvzSyuRtPNxtUzrThZFcUhu5rMC9AA==
   dependencies:
     axios "^0.27.2"
     fp-ts "^2.10.5"
